@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Senthuran for 1st Year Rep</title>
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#252527">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Press+Start+2P&family=JetBrains+Mono:wght@400;600;800&display=swap">
+<meta name="description" content="Senthuran Srimurugan for CompSoc 1st Year Rep: six quests to help first years build real things, get into the SIGs and get a head start. Vote Wed 28 Oct, G.07 Informatics Forum.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vote Senthuran for 1st Year Rep">
+<meta property="og:description" content="Senthuran Srimurugan for CompSoc 1st Year Rep: six quests to help first years build real things, get into the SIGs and get a head start. Vote Wed 28 Oct, G.07 Informatics Forum.">
+<meta property="og:image" content="/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%23252527'/%3E%3Crect x='1' y='2' width='6' height='4' fill='%23A3161F'/%3E%3Crect x='2' y='3' width='1' height='1' fill='%23F3F1EE'/%3E%3Crect x='5' y='3' width='1' height='1' fill='%23F3F1EE'/%3E%3C/svg%3E">
+<style>
+/* Layout: a chalkboard arcade cabinet. Pixel hero → inventory → six quests → level map → passport demo → player card → vote screen. Single dark world by choice. */
+:root{
+  --chalk:#252527;      /* board */
+  --chalk-2:#2f2f32;    /* raised panel */
+  --chalk-3:#3a3a3e;    /* hairline / inactive */
+  --red:#A3161F;        /* CompSoc red, a shade darker */
+  --red-hi:#C8232E;     /* hover / glow */
+  --red-lo:#6E0D14;     /* pixel shadow */
+  --snow:#F3F1EE;       /* white type */
+  --dust:#A9A6A2;       /* secondary type */
+  --f-display:"Silkscreen","Press Start 2P",ui-monospace,monospace;
+  --f-arcade:"Press Start 2P","Silkscreen",ui-monospace,monospace;
+  --f-body:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --px:4px;
+  --clip:polygon(0 calc(var(--px)*2),var(--px) calc(var(--px)*2),var(--px) var(--px),calc(var(--px)*2) var(--px),calc(var(--px)*2) 0,calc(100% - var(--px)*2) 0,calc(100% - var(--px)*2) var(--px),calc(100% - var(--px)) var(--px),calc(100% - var(--px)) calc(var(--px)*2),100% calc(var(--px)*2),100% calc(100% - var(--px)*2),calc(100% - var(--px)) calc(100% - var(--px)*2),calc(100% - var(--px)) calc(100% - var(--px)),calc(100% - var(--px)*2) calc(100% - var(--px)),calc(100% - var(--px)*2) 100%,calc(var(--px)*2) 100%,calc(var(--px)*2) calc(100% - var(--px)),var(--px) calc(100% - var(--px)),var(--px) calc(100% - var(--px)*2),0 calc(100% - var(--px)*2));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--chalk);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background-color:var(--chalk);color:var(--snow);
+  font-family:var(--f-body);font-size:16px;line-height:1.65;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+    radial-gradient(ellipse at 20% 0%,#323236 0%,transparent 55%),
+    radial-gradient(ellipse at 90% 60%,#2d2d31 0%,transparent 50%);
+  overflow-x:hidden;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--chalk)}
+::selection{background:var(--red);color:var(--snow)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red-hi);outline-offset:3px}
+
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.wrap{position:relative;z-index:1;max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(37,37,39,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:var(--px) solid var(--chalk-3)}
+.bar .wrap{display:flex;align-items:center;gap:16px;padding-block:10px}
+.logo{font-family:var(--f-arcade);font-size:11px;letter-spacing:.04em;text-decoration:none;white-space:nowrap}
+.logo b{color:var(--red-hi);font-weight:400}
+.nav{display:flex;gap:4px;margin-left:auto}
+.nav a{font-family:var(--f-display);font-size:14px;text-decoration:none;padding:6px 10px;color:var(--dust);text-transform:uppercase}
+.nav a:hover{color:var(--snow);background:var(--chalk-3)}
+.bar .btn{padding:12px 14px;font-size:10px}
+@media (max-width:760px){.nav{display:none}.bar .btn{margin-left:auto}}
+
+/* buttons */
+.btn{
+  --bg:var(--red);display:inline-flex;align-items:center;gap:10px;cursor:pointer;
+  font-family:var(--f-arcade);font-size:12px;line-height:1.2;color:var(--snow);text-decoration:none;
+  background:var(--bg);border:0;padding:16px 22px;clip-path:var(--clip);
+  box-shadow:inset 0 calc(var(--px)*-1) 0 var(--red-lo),inset 0 var(--px) 0 var(--red-hi);
+  transition:transform .08s steps(2),filter .15s;
+}
+.btn:hover{--bg:var(--red-hi);transform:translateY(-2px)}
+.btn:active{transform:translateY(2px);box-shadow:inset 0 var(--px) 0 var(--red-lo)}
+.btn.ghost{--bg:var(--chalk-3);box-shadow:inset 0 calc(var(--px)*-1) 0 #232326,inset 0 var(--px) 0 #4a4a4f}
+.btn.ghost:hover{--bg:#47474c}
+
+/* hero */
+.hero{padding-block:56px 72px;position:relative}
+.year{cursor:pointer;user-select:none;-webkit-user-select:none;position:absolute;right:max(16px,env(safe-area-inset-right,0px));top:28px;font-family:var(--f-display);font-size:clamp(20px,3.4vw,34px);transform:rotate(14deg);color:var(--snow);text-shadow:3px 3px 0 #000;animation:wob 3s steps(3) infinite}
+@keyframes wob{50%{transform:rotate(10deg) translateY(-3px)}}
+.eyebrow{font-family:var(--f-arcade);font-size:11px;color:var(--dust);letter-spacing:.08em;display:flex;align-items:center;gap:10px;margin:0 0 18px}
+.blink{width:10px;height:14px;background:var(--red-hi);display:inline-block;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.h-vote{font-family:var(--f-display);font-weight:400;font-size:clamp(2.4rem,9vw,6.4rem);line-height:.95;letter-spacing:.14em;margin:0;text-shadow:var(--px) var(--px) 0 #000}
+.slab{display:inline-block;background:var(--red);clip-path:var(--clip);--px:8px;margin:14px 0 14px -6px;padding:.14em .26em .2em;box-shadow:inset 0 -10px 0 var(--red-lo),inset 0 8px 0 var(--red-hi)}
+.slab h1{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(2rem,9.2vw,7.2rem);line-height:1;letter-spacing:.02em;color:var(--snow);text-shadow:6px 6px 0 var(--red-lo)}
+.h-role{font-family:var(--f-display);font-size:clamp(1.3rem,4.6vw,3.2rem);margin:0;letter-spacing:.06em;line-height:1.1}
+.h-wrapped{font-family:var(--f-display);font-size:clamp(1.3rem,4.6vw,3.2rem);color:var(--red-hi);margin:4px 0 0;letter-spacing:.12em;line-height:1.1}
+.term{margin-top:34px;max-width:640px;background:#1b1b1d;border:var(--px) solid var(--chalk-3);padding:14px 16px;font-size:14px;line-height:1.6;min-height:94px}
+.term .p{color:var(--red-hi)}
+.term .ok{color:#8fd18f}
+.term .caret{display:inline-block;width:9px;height:16px;background:var(--snow);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px;align-items:center}
+.count{font-family:var(--f-arcade);font-size:10px;color:var(--dust);line-height:1.8}
+.count strong{display:block;font-size:22px;color:var(--snow);font-weight:400}
+
+/* sections */
+section{padding-block:72px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;margin-bottom:32px}
+.kicker{font-family:var(--f-arcade);font-size:10px;color:var(--red-hi);letter-spacing:.1em;margin:0 0 12px}
+h2{font-family:var(--f-display);font-weight:700;font-size:clamp(1.8rem,5vw,3.4rem);line-height:1.05;margin:0;text-wrap:balance;text-shadow:var(--px) var(--px) 0 #000}
+.lede{max-width:56ch;color:var(--dust);margin:0}
+.lede b{color:var(--snow)}
+.rule{height:var(--px);background:repeating-linear-gradient(90deg,var(--chalk-3) 0 12px,transparent 12px 20px);border:0;margin:0}
+
+/* inventory */
+.inv{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:820px){.inv{grid-template-columns:1fr}}
+.panel{background:var(--chalk-2);clip-path:var(--clip);padding:24px;min-width:0}
+.panel h3{font-family:var(--f-arcade);font-size:12px;line-height:1.6;margin:0 0 18px;font-weight:400}
+.slots{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.slots li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;font-size:14px}
+.slots .ic{width:28px;height:28px;display:grid;place-items:center;font-family:var(--f-arcade);font-size:11px;background:var(--chalk-3)}
+.got .ic{background:#2c4a2c;color:#9fe09f}
+.miss .ic{background:var(--red);color:var(--snow)}
+.slots b{display:block;font-weight:800}
+.slots span{color:var(--dust)}
+
+/* quests */
+.quests{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:980px){.quests{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.quests{grid-template-columns:1fr}}
+.q{position:relative;background:var(--chalk-2);clip-path:var(--clip);padding:22px 22px 20px;display:flex;flex-direction:column;gap:12px;min-width:0;transition:transform .12s steps(2),background .2s}
+.q::after{content:"";position:absolute;inset:auto 0 0 0;height:var(--px);background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .35s steps(8)}
+.q:hover{transform:translateY(-4px);background:#353539}
+.q:hover::after{transform:scaleX(1)}
+.q-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.q-num{font-family:var(--f-arcade);font-size:10px;color:var(--dust)}
+.tag{font-family:var(--f-arcade);font-size:8px;padding:6px 8px;letter-spacing:.06em;white-space:nowrap}
+.tag.solo{background:var(--snow);color:var(--chalk)}
+.tag.coop{background:var(--red);color:var(--snow)}
+.sprite{width:60px;height:60px;image-rendering:pixelated}
+.q:hover .sprite{animation:hop .5s steps(2) infinite}
+@keyframes hop{50%{transform:translateY(-4px)}}
+.q h3{font-family:var(--f-display);font-weight:700;font-size:1.45rem;line-height:1.1;margin:0}
+.q .sub{font-family:var(--f-arcade);font-size:9px;color:var(--red-hi);line-height:1.6;margin:-4px 0 0}
+.q p{margin:0;font-size:14px;color:#d6d3cf}
+.q .when{margin-top:auto;padding-top:12px;border-top:2px dashed var(--chalk-3);font-size:13px;color:var(--dust)}
+.q .when b{color:var(--snow);font-family:var(--f-arcade);font-size:9px;font-weight:400;margin-right:6px}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--dust);align-items:center}
+.legend span{display:inline-flex;gap:8px;align-items:center}
+
+/* map */
+.map{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:lv}
+.map::before{content:"";position:absolute;left:0;right:0;top:27px;height:var(--px);background:repeating-linear-gradient(90deg,var(--snow) 0 8px,transparent 8px 16px);opacity:.5}
+.stop{position:relative;padding:0 14px 0 0;min-width:0}
+.node{width:58px;height:58px;display:grid;place-items:center;background:var(--chalk-3);clip-path:var(--clip);font-family:var(--f-arcade);font-size:11px;position:relative}
+.stop.now .node{background:var(--red);animation:pulse 1.2s steps(2) infinite}
+@keyframes pulse{50%{background:var(--red-hi)}}
+.stop .lbl{font-family:var(--f-arcade);font-size:9px;color:var(--red-hi);margin:18px 0 8px;line-height:1.6}
+.stop h4{font-family:var(--f-display);font-size:1.15rem;margin:0 0 8px;line-height:1.15}
+.stop ul{margin:0;padding:0;list-style:none;font-size:13px;color:var(--dust);display:grid;gap:4px}
+.stop li::before{content:"▸ ";color:var(--red-hi)}
+@media (max-width:820px){
+  .map{grid-template-columns:1fr;gap:28px}
+  .map::before{left:27px;right:auto;top:0;bottom:0;width:var(--px);height:auto;background:repeating-linear-gradient(180deg,var(--snow) 0 8px,transparent 8px 16px)}
+  .stop{display:grid;grid-template-columns:58px 1fr;gap:0 18px;padding:0}
+  .stop .node{grid-row:span 3}
+  .stop .lbl{margin-top:4px}
+}
+
+/* passport */
+.pass{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:start}
+@media (max-width:860px){.pass{grid-template-columns:1fr}}
+.book{background:#e9e4da;color:#2a2526;clip-path:var(--clip);padding:22px;position:relative;min-width:0}
+.book::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 27px,rgba(42,37,38,.07) 27px 28px);pointer-events:none}
+.book-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;position:relative;margin-bottom:16px;border-bottom:3px solid #2a2526;padding-bottom:10px;flex-wrap:wrap}
+.book-head b{font-family:var(--f-arcade);font-size:11px}
+.book-head span{font-size:12px}
+.stamps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;position:relative}
+@media (max-width:420px){.stamps{grid-template-columns:repeat(2,1fr)}}
+.stamp{appearance:none;cursor:pointer;aspect-ratio:1;max-width:100%;border:3px dashed rgba(42,37,38,.35);background:transparent;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:15px;color:rgba(42,37,38,.55);padding:6px;position:relative;transition:transform .1s}
+.stamp small{display:block;font-family:var(--f-body);font-weight:400;font-size:11px;margin-top:4px;color:rgba(42,37,38,.55)}
+.stamp:hover{border-color:var(--red);color:var(--red)}
+.stamp.on{border:4px solid var(--red);color:var(--red);transform:rotate(var(--r,-6deg));animation:thunk .25s steps(3)}
+.stamp.on small{color:var(--red)}
+.stamp.on::after{content:"✓";position:absolute;top:4px;right:8px;font-family:var(--f-arcade);font-size:12px}
+@keyframes thunk{0%{transform:scale(1.5) rotate(0)}100%{transform:scale(1) rotate(var(--r,-6deg))}}
+.meter{display:flex;gap:6px;margin:18px 0 8px}
+.meter i{flex:1;height:18px;background:var(--chalk-3);clip-path:var(--clip);--px:3px}
+.meter i.on{background:var(--red-hi)}
+.pass-status{font-family:var(--f-arcade);font-size:11px;line-height:1.8;min-height:40px}
+.pass-status.win{color:var(--red-hi);animation:blink .5s steps(1) 4}
+.note{font-size:13px;color:var(--dust)}
+
+/* side quests */
+.side{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:0;padding:0;list-style:none}
+@media (max-width:700px){.side{grid-template-columns:1fr}}
+.side li{display:grid;grid-template-columns:24px 1fr;gap:14px;align-items:start;background:var(--chalk-2);padding:16px 18px;clip-path:var(--clip);font-size:14px;color:#d6d3cf}
+.side li::before{content:"";width:16px;height:16px;margin-top:3px;border:3px solid var(--snow)}
+
+/* player card */
+.player{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;background:var(--chalk-2);clip-path:var(--clip);--px:6px;padding:32px}
+@media (max-width:720px){.player{grid-template-columns:1fr;padding:22px}}
+.avatar{width:168px;height:168px;image-rendering:pixelated;background:var(--chalk);padding:12px;clip-path:var(--clip)}
+.stats{display:grid;gap:12px;margin-top:18px}
+.stat{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;font-size:13px}
+@media (max-width:460px){.stat{grid-template-columns:1fr;gap:4px}}
+.stat dt{font-family:var(--f-arcade);font-size:9px;color:var(--dust)}
+.stat dd{margin:0}
+.bars{display:flex;gap:3px}
+.bars i{width:14px;height:14px;background:var(--chalk-3)}
+.bars i.on{background:var(--red-hi)}
+.player p{margin:12px 0 0;max-width:60ch;color:#d6d3cf}
+.player h3{font-family:var(--f-display);font-size:1.9rem;margin:0;line-height:1.1}
+
+/* vote */
+.vote{background:var(--red);clip-path:var(--clip);--px:10px;padding:48px 36px;position:relative;overflow:hidden;box-shadow:inset 0 -12px 0 var(--red-lo),inset 0 10px 0 var(--red-hi)}
+@media (max-width:600px){.vote{padding:36px 22px}}
+.vote::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.08) 0 2px,transparent 2px 4px);pointer-events:none}
+.vote > *{position:relative}
+.vote .kicker{color:var(--snow);opacity:.8}
+.vote h2{font-size:clamp(2.2rem,7vw,5rem);text-shadow:6px 6px 0 var(--red-lo)}
+.vote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0}
+@media (max-width:760px){.vote-grid{grid-template-columns:1fr}}
+.vbox{background:rgba(0,0,0,.22);padding:18px;clip-path:var(--clip);--px:4px}
+.vbox b{display:block;font-family:var(--f-arcade);font-size:9px;opacity:.75;margin-bottom:10px;font-weight:400}
+.vbox span{font-family:var(--f-display);font-size:1.3rem;line-height:1.2;display:block}
+.vbox small{display:block;font-size:13px;margin-top:6px;opacity:.85}
+.vote .btn{--bg:var(--snow);color:var(--red);box-shadow:inset 0 -4px 0 #bdb8b1,inset 0 4px 0 #fff}
+.vote .btn:hover{--bg:#fff}
+.vote-foot{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.vote-foot p{margin:0;font-size:14px;max-width:48ch}
+
+footer{padding-block:48px 64px;text-align:left;color:var(--dust);font-size:13px}
+footer .sig{font-family:var(--f-display);font-size:1.6rem;color:var(--snow);margin:0 0 6px}
+footer kbd{font-family:var(--f-arcade);font-size:8px;background:var(--chalk-3);padding:4px 5px;color:var(--snow)}
+
+.toast{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));margin-inline:auto;width:fit-content;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateY(160%);text-align:center;z-index:70;background:var(--snow);color:var(--chalk);font-family:var(--f-arcade);font-size:10px;line-height:1.7;padding:14px 18px;clip-path:var(--clip);max-width:520px;transition:transform .3s steps(5)}
+.toast.show{transform:none}
+
+.tag,.legend i{font-style:normal}
+
+/* quest carousel dots (phone only) */
+.qnav{display:none}
+
+/* ===== PHONE ===== */
+@media (max-width:640px){
+  section{padding-block:44px}
+  .hero{padding-block:22px 40px}
+  .year{position:static;display:inline-block;font-size:18px;margin:0 0 6px auto;float:right;transform:rotate(10deg)}
+  .eyebrow{font-size:8px;gap:8px;margin-bottom:14px;clear:both}
+  .h-vote{font-size:15vw;letter-spacing:.1em}
+  .slab{display:block;margin:10px -6px 12px;padding:.18em .2em .24em;--px:6px}
+  .slab h1{font-size:10.6vw;text-align:center;text-shadow:4px 4px 0 var(--red-lo)}
+  .h-role,.h-wrapped{font-size:6.6vw;letter-spacing:.04em}
+  .term{font-size:12.5px;padding:12px;min-height:118px;margin-top:24px}
+  .hero-cta{display:grid;grid-template-columns:1fr auto;gap:12px;margin-top:20px}
+  .hero-cta .btn:first-child{grid-column:1 / -1;justify-content:center;padding:18px;font-size:13px}
+  .hero-cta .btn.ghost{justify-content:center;font-size:10px;padding:14px 12px}
+  .count{text-align:right;font-size:8px}
+  .count strong{font-size:24px}
+  .sec-head{margin-bottom:22px}
+  .kicker{font-size:8px}
+  h2{font-size:8.4vw}
+  .lede{font-size:14.5px}
+  .panel{padding:18px}
+  .panel h3{font-size:10px}
+
+  /* quests become a swipe deck */
+  .quests{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;
+    margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));
+    padding-inline:max(16px,env(safe-area-inset-left,0px));scroll-padding-inline:max(16px,env(safe-area-inset-left,0px));
+    padding-bottom:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .quests::-webkit-scrollbar{display:none}
+  .q{flex:0 0 86%;scroll-snap-align:start;padding:18px}
+  .q:hover{transform:none}
+  .q p{font-size:13.5px}
+  .q h3{font-size:clamp(1.05rem,6vw,1.45rem);overflow-wrap:anywhere}
+  .sprite{width:48px;height:48px}
+  .qnav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+  .dots{display:flex;gap:6px}
+  .dots button{width:22px;height:10px;border:0;padding:0;background:var(--chalk-3);cursor:pointer;transition:width .2s steps(3);position:relative}
+  .dots button::after{content:"";position:absolute;inset:-14px -3px}
+  .dots button.on{background:var(--red-hi);width:38px}
+  .qnav .swipe{font-family:var(--f-arcade);font-size:8px;color:var(--dust);white-space:nowrap}
+  .dots button{width:16px}.dots button.on{width:28px}
+  .qnav .arrows{display:flex;gap:8px}
+  .qnav .arrows button{font-family:var(--f-arcade);font-size:11px;width:44px;height:44px;border:0;color:var(--snow);background:var(--chalk-3);clip-path:var(--clip);--px:3px;cursor:pointer}
+  .legend{gap:10px;font-size:12px}
+
+  .map{gap:22px}
+  .stop h4{font-size:1.05rem}
+
+  .stamps{grid-template-columns:repeat(3,1fr);gap:8px}
+  .stamp{font-size:11px;padding:4px;border-width:2px}
+  .stamp small{font-size:9px;line-height:1.2}
+  .stamp.on{border-width:3px}
+  .book{padding:16px}
+  .book-head span{font-size:11px}
+
+  .side li{padding:14px;font-size:13.5px}
+
+  .player{grid-template-columns:76px 1fr;gap:4px 16px;padding:18px;align-items:center}
+  .avatar{width:76px;height:76px;padding:6px}
+  .player-body{display:contents}
+  .player h3{font-size:1.25rem;align-self:center}
+  .player p,.player .stats{grid-column:1 / -1}
+  .player p{font-size:14px}
+  .stat{grid-template-columns:110px 1fr;gap:10px}
+  .bars i{width:12px;height:12px}
+
+  .vote{padding:28px 18px;--px:8px}
+  .vote h2{font-size:8.4vw;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .vote h2 #cd{font-size:1.35em;color:var(--snow);min-width:2ch;text-align:right;font-variant-numeric:tabular-nums}
+  .vote-grid{gap:8px;margin:20px 0}
+  .vbox{display:grid;grid-template-columns:70px 1fr;gap:2px 12px;padding:14px;align-items:baseline}
+  .vbox b{margin:0;font-size:8px}
+  .vbox span{font-size:1rem}
+  .vbox small{grid-column:2;margin-top:2px;font-size:12px}
+  .vote .btn{width:100%;justify-content:center;font-size:11px;padding:18px 10px}
+  .vote-foot p{font-size:13px}
+  footer kbd{font-size:7px}
+}
+@media (max-width:360px){
+  .logo{font-size:9px}
+  .bar .btn{font-size:9px;padding:12px 10px}
+  .term{font-size:11.5px}
+  .hero-cta .btn.ghost{font-size:9px;padding:14px 8px}
+  .count strong{font-size:20px}
+  .stamp{font-size:9.5px}
+  .stamp small{font-size:8px}
+  .stat{grid-template-columns:96px 1fr}
+  .stat dt{font-size:8px}
+  .bars{gap:2px}.bars i{width:10px;height:10px}
+  .vbox{grid-template-columns:58px 1fr}
+}
+@media (max-width:640px) and (hover:none){ .q:hover{background:var(--chalk-2)} }
+
+/* intro reveal */
+@media (prefers-reduced-motion:no-preference){
+  .rise{animation:rise .6s steps(6) both}
+  .d1{animation-delay:.05s}.d2{animation-delay:.2s}.d3{animation-delay:.35s}.d4{animation-delay:.5s}
+  @keyframes rise{from{transform:translateY(16px)}to{transform:none}}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<canvas id="snow" aria-hidden="true"></canvas>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top">SENTHURAN<b>.EXE</b></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#quests">Quests</a>
+      <a href="#map">Map</a>
+      <a href="#passport">Passport</a>
+      <a href="#player">Player</a>
+    </nav>
+    <a class="btn" href="#vote">Vote 28.10</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div class="year" aria-hidden="true">2026</div>
+    <p class="eyebrow rise d1"><span class="blink"></span>COMPSOC EGM · PLAYER 1 READY</p>
+    <p class="h-vote rise d1">VOTE</p>
+    <div class="slab rise d2"><h1>SENTHURAN</h1></div>
+    <p class="h-role rise d3">FOR 1ST YEAR REP</p>
+    <p class="h-wrapped rise d3">MANIFESTO WRAPPED</p>
+
+    <div class="term rise d4" aria-live="polite"><div id="termOut"></div></div>
+
+    <div class="hero-cta rise d4">
+      <a class="btn" href="#quests">▶ Press start</a>
+      <a class="btn ghost" href="#vote">How to vote</a>
+      <div class="count" id="countBox"><strong id="days">--</strong><span id="daysLbl">DAYS TO THE EGM</span></div>
+    </div>
+  </div>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <section id="inventory">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="kicker">LEVEL 0 · CHECK YOUR INVENTORY</p>
+          <h2>Before promising anything, I checked what already exists.</h2>
+        </div>
+        <p class="lede">CompSoc has loads first years would love, but a lot of it is set up for people who already know their way around. For coursework we're actually <b>pretty well covered</b>, so I'm not promising that again.</p>
+      </div>
+      <div class="inv">
+        <div class="panel got">
+          <h3>ALREADY IN YOUR INVENTORY</h3>
+          <ul class="slots">
+            <li><span class="ic">✓</span><div><b>InfPALS</b><span>Study groups for our courses.</span></div></li>
+            <li><span class="ic">✓</span><div><b>Academic Families</b><span>Pairs us with older students.</span></div></li>
+            <li><span class="ic">✓</span><div><b>Better Informatics</b><span>Past paper answers and notes.</span></div></li>
+          </ul>
+        </div>
+        <div class="panel miss">
+          <h3>MISSING ITEMS · WHAT I'LL FOCUS ON</h3>
+          <ul class="slots">
+            <li><span class="ic">?</span><div><b>Building real things</b><span>Projects, hackathons, stuff on the actual internet.</span></div></li>
+            <li><span class="ic">?</span><div><b>Getting into the SIGs</b><span>12 of them. Most of us have been to one, if any.</span></div></li>
+            <li><span class="ic">?</span><div><b>A head start on opportunities</b><span>Insight days, CTFs, first-year programmes.</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quests">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="kicker">LEVEL 1 · SELECT YOUR QUEST</p>
+          <h2>Six things I want to do</h2>
+        </div>
+        <div class="legend">
+          <span><i class="tag solo">SOLO</i> I can just go and do it</span>
+          <span><i class="tag coop">CO-OP</i> Needs committee or a SIG on board</span>
+        </div>
+      </div>
+      <div class="quests" id="questGrid"></div>
+      <div class="qnav"><div class="dots" id="dots"></div><span class="swipe" id="qcount">01/06</span><div class="arrows"><button type="button" id="qprev" aria-label="Previous quest">◀</button><button type="button" id="qnext" aria-label="Next quest">▶</button></div></div>
+    </div>
+  </section>
+
+  <section id="map">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="kicker">LEVEL 2 · WORLD MAP</p>
+          <h2>When it all happens</h2>
+        </div>
+        <p class="lede">I'll post progress on every quest, so you can see what's happened and what hasn't.</p>
+      </div>
+      <div class="map">
+        <div class="stop now"><div class="node">1-1</div><p class="lbl">28 OCT</p><h4>EGM</h4><ul><li>You vote</li></ul></div>
+        <div class="stop"><div class="node">1-2</div><p class="lbl">+2 WEEKS · NOV</p><h4>Board goes up</h4><ul><li>Opportunities list pinned on Discord</li><li>Pitch First Commit to committee</li><li>Push for SIG Passport</li></ul></div>
+        <div class="stop"><div class="node">1-3</div><p class="lbl">END OF SEM 1</p><h4>Ship It</h4><ul><li>Workshop with Tardis, if they're up for it</li></ul></div>
+        <div class="stop"><div class="node">2-1</div><p class="lbl">SEMESTER 2</p><h4>Boss rush</h4><ul><li>SIG Passport launches</li><li>First Commit build night</li><li>First PR night</li><li>Hackathon road trips</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="passport">
+    <div class="wrap">
+      <div class="pass">
+        <div>
+          <p class="kicker">LEVEL 3 · TRY IT YOURSELF</p>
+          <h2>SIG Passport</h2>
+          <p class="lede" style="margin-top:16px">In semester 2 you collect a stamp, a Discord role from the bots CompSoc already runs, for each different SIG you try. <b>Get three and you're in a draw</b> for something actually good, like an InfBall ticket or CompSoc merch.</p>
+          <p class="lede" style="margin-top:12px">It gets people into SIGs they'd never have walked into, and the SIGs get new members out of it too.</p>
+        </div>
+        <div class="book">
+          <div class="book-head"><b>PASSPORT · 1ST YEAR</b><span>Tap a SIG to stamp it</span></div>
+          <div class="stamps" id="stamps"></div>
+          <div class="meter" aria-hidden="true"><i></i><i></i><i></i></div>
+          <p class="pass-status" id="passStatus" aria-live="polite">0 / 3 STAMPS</p>
+          <p class="note" style="color:#5b5455;margin:0;position:relative">Demo only. The real one runs on Discord roles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="side">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <p class="kicker">SIDE QUESTS · ALWAYS ON</p>
+          <h2>Plus the normal rep stuff</h2>
+        </div>
+      </div>
+      <ul class="side">
+        <li>Keep first years updated on what's coming up through the Discord.</li>
+        <li>Keep a feedback form open all year, and take what you tell me to committee.</li>
+        <li>Help out with InfBall and the other big events, and get more first years involved.</li>
+        <li>Post progress on everything, and be honest about what I can just do and what needs committee to agree.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="player">
+    <div class="wrap">
+      <p class="kicker">PLAYER SELECT</p>
+      <div class="player">
+        <svg class="avatar" id="avatar" viewBox="0 0 16 16" aria-hidden="true" shape-rendering="crispEdges"></svg>
+        <div class="player-body">
+          <h3>Senthuran Srimurugan</h3>
+          <p>Hi! I'm a first year doing CS. I'm really into hackathons and I've started doing freelance web development, so building things and getting people together is kind of my thing. Message me with ideas, complaints, anything.</p>
+          <dl class="stats">
+            <div class="stat"><dt>CLASS</dt><dd>Computer Science (BEng Hons)</dd></div>
+            <div class="stat"><dt>LEVEL</dt><dd>1st year</dd></div>
+            <div class="stat"><dt>HACKATHONS</dt><dd><div class="bars" data-v="9"></div></dd></div>
+            <div class="stat"><dt>WEB DEV</dt><dd><div class="bars" data-v="8"></div></dd></div>
+            <div class="stat"><dt>REPLY SPEED</dt><dd><div class="bars" data-v="10"></div></dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vote">
+    <div class="wrap">
+      <div class="vote">
+        <p class="kicker">FINAL LEVEL</p>
+        <h2>CONTINUE? <span id="cd" style="white-space:nowrap">10</span></h2>
+        <div class="vote-grid">
+          <div class="vbox"><b>WHEN</b><span>Wednesday 28th October</span><small id="vWhen">At the CompSoc EGM</small></div>
+          <div class="vbox"><b>WHERE</b><span>G.07, Informatics Forum</span><small>Or vote online</small></div>
+          <div class="vbox"><b>YOU NEED</b><span>CompSoc membership on EUSA</span><small>It's free. Sign up before the day.</small></div>
+        </div>
+        <div class="vote-foot">
+          <button class="btn" id="yes" type="button">▶ YES · VOTE SENTHURAN</button>
+          <p>Thanks for reading. I'd really appreciate your vote :)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p class="sig">Senthuran</p>
+      <p style="margin:0">Candidate for 1st Year Rep, CompSoc EGM. <span id="egg">Psst: try <kbd>↑</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd><kbd>←</kbd><kbd>→</kbd><kbd>B</kbd><kbd>A</kbd></span></p>
+    </div>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const C = {x:'#C8232E', w:'#F3F1EE', d:'#6E0D14', s:'#c48a63', h:'#1b1b1d', g:'#3a3a3e'};
+
+function sprite(map){
+  const h = map.length, w = map[0].length;
+  let r = '';
+  map.forEach((row,y)=>[...row].forEach((c,x)=>{ if(C[c]) r += `<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="${C[c]}"/>`; }));
+  return {w,h,r};
+}
+function svg(map,cls){ const s = sprite(map); return `<svg class="${cls}" viewBox="0 0 ${s.w} ${s.h}" aria-hidden="true" shape-rendering="crispEdges">${s.r}</svg>`; }
+
+/* ---------- quests ---------- */
+const S = {
+  laptop:["..........",".wwwwwwww.",".wgggggww.",".wgxxgggw.",".wgggxxgw.",".wggggggw.",".wwwwwwww.","wwwwwwwwww","wddddddddw",".........."],
+  rocket:["....xx....","...xwwx...","...xwgx...","...xwwx...","..xxwwxx..",".x.xwwx.x.","x..xxxx..x","....ww....","...w..w...","....ww...."],
+  stamp:["...xxxx...","...xxxx...","....xx....","....xx....",".wwwwwwww.",".wxxxxxxw.",".wwwwwwww.","..........","x.x.x.x.x.",".x.x.x.x.x"],
+  board:["wwwwwwwwww","w....x...w","w.xx.....w","w....www.w","w.xx.....w","w....www.w","w.xx.....w","w....www.w","wwwwwwwwww","...w..w..."],
+  bus:["..........",".xxxxxxxx.",".xwwxwwxx.",".xwwxwwxx.",".xxxxxxxx.",".xxxxxxxx.",".xxxxxxxxw","..ww..ww..","..ww..ww..",".........."],
+  branch:["..w.......",".www......","..w....x..","..w...xxx.","..w....x..","..w...x...","..w..x....","..wxx.....",".www......","..w......."]
+};
+const Q = [
+  {s:'laptop', t:'First Commit', sub:'A first-years-only build night', tag:'coop',
+   p:"Hack the Burgh is amazing, but 24 hours with 300 people is a big first step. Around 6 hours, teams you pick or get put in, HackSIG members walking round to help, quick demos at the end. You don't need to know anything going in. Best projects show off at Project Share.",
+   w:'Pitch to committee in November, run early semester 2. A practice run before Hack the Burgh XIV.'},
+  {s:'rocket', t:'Ship It', sub:'Get your first project online', tag:'coop',
+   p:"Most of us have written code for coursework, but not many have put anything on the internet. I build websites for small businesses on the side, so I'd run a workshop with the Tardis Project where everyone leaves with a site live on CompSoc's own servers. Nice on a CV too.",
+   w:'Before the end of semester 1 if Tardis are up for it, otherwise early semester 2.'},
+  {s:'stamp', t:'SIG Passport', sub:'Collect stamps, win something good', tag:'coop',
+   p:"Collect a Discord role for each different SIG you try. Three stamps puts you in a draw for an InfBall ticket or CompSoc merch. Gets people into TypeSig, BitSig or CCSig that they'd never have walked into otherwise.",
+   w:'Push for it at committee, launch at the start of semester 2.'},
+  {s:'board', t:'Opportunities Board', sub:'One pinned list, with deadlines', tag:'solo',
+   p:"Insight days, first-year programmes, SIGINT's pwnEd CTF, competitive programming with CCSig. Right now they're scattered across sponsor emails and random posts. I'll keep one pinned list on the Discord, and push for a sponsor CV and LinkedIn night aimed at first years.",
+   w:'Up within two weeks of the EGM, then updated as things come in.'},
+  {s:'bus', t:'Hackathon Road Trips', sub:'Go together, not alone', tag:'coop',
+   p:"Once people do one hackathon, they usually want more. Groups of first years heading to student hackathons around the UK, with CompSoc helping on travel costs. Going with a group is way less scary, and a really good way to make friends.",
+   w:'Semester 2, once First Commit has got people started.'},
+  {s:'branch', t:'First PR Night', sub:'Your first open-source contribution', tag:'coop',
+   p:"CompSoc runs a lot of its own software on GitHub: the website, Discord bots, Better Informatics and more. Beginner-friendly issues set up in advance, and you leave with your name on a real project people actually use.",
+   w:'Semester 2, working with the Tech Sec.'}
+];
+document.getElementById('questGrid').innerHTML = Q.map((q,i)=>`
+  <article class="q">
+    <div class="q-top">${svg(S[q.s],'sprite')}<span class="tag ${q.tag}">${q.tag==='solo'?'SOLO':'CO-OP'}</span></div>
+    <div class="q-num">QUEST 0${i+1} / 06</div>
+    <h3>${q.t}</h3>
+    <p class="sub">${q.sub.toUpperCase()}</p>
+    <p>${q.p}</p>
+    <div class="when"><b>WHEN</b>${q.w}</div>
+  </article>`).join('');
+
+/* ---------- quest swipe deck ---------- */
+const grid = document.getElementById('questGrid'), dots = document.getElementById('dots'), qc = document.getElementById('qcount');
+dots.innerHTML = Q.map((_,i)=>`<button type="button" aria-label="Quest ${i+1}"></button>`).join('');
+const cards = [...grid.children], dbtn = [...dots.children];
+let cur = 0;
+function setCur(i){ cur=i; dbtn.forEach((b,j)=>b.classList.toggle('on',j===i)); qc.textContent = `0${i+1}/06`; }
+function go(i){ i=Math.max(0,Math.min(5,i)); grid.scrollTo({left:cards[i].offsetLeft-cards[0].offsetLeft,behavior:RM?'auto':'smooth'}); }
+grid.addEventListener('scroll',()=>{ const w=cards[1].offsetLeft-cards[0].offsetLeft; if(w>0) { const i=Math.round(grid.scrollLeft/w); if(i!==cur) setCur(Math.max(0,Math.min(5,i))); } },{passive:true});
+dbtn.forEach((b,i)=>b.addEventListener('click',()=>go(i)));
+document.getElementById('qprev').onclick=()=>go(cur-1);
+document.getElementById('qnext').onclick=()=>go(cur+1);
+setCur(0);
+
+/* ---------- avatar ---------- */
+const AV = [
+ "................",
+ "................",
+ "................",
+ "................",
+ "..xxxxxxxxxxxx..",
+ ".xxxxxxxxxxxxxx.",
+ ".xxwxxxxxxxxxxx.",
+ "xxwwwxxxxxxhxxxx",
+ "xxxwxxxxxxhxhxxx",
+ "xxxxxxxwwxxhxxxx",
+ ".xxxxxxxxxxxxxx.",
+ ".xxxxdddddxxxxx.",
+ "..xxdd....ddxx..",
+ "...dd......dd...",
+ "................",
+ "................"
+];
+document.getElementById('avatar').innerHTML = sprite(AV).r;
+document.querySelectorAll('.bars').forEach(b=>{ const v=+b.dataset.v; b.innerHTML = Array.from({length:10},(_,i)=>`<i class="${i<v?'on':''}"></i>`).join(''); });
+
+/* ---------- passport ---------- */
+const SIGS = [['HackSIG','hackathons'],['Tardis','hosting'],['TypeSig','type theory'],['BitSig','hardware'],['CCSig','comp. programming'],['SIGINT','security']];
+const stampsEl = document.getElementById('stamps');
+stampsEl.innerHTML = SIGS.map((s,i)=>`<button class="stamp" type="button" id="st${i}" aria-pressed="false" style="--r:${[-7,5,-3,8,-5,4][i]}deg"><span>${s[0]}<small>${s[1]}</small></span></button>`).join('');
+const meter = document.querySelectorAll('.meter i'), status = document.getElementById('passStatus');
+let won = false;
+stampsEl.addEventListener('click', e=>{
+  const b = e.target.closest('.stamp'); if(!b) return;
+  const on = !b.classList.contains('on'); try{ navigator.vibrate && navigator.vibrate(on?18:8); }catch(_){} b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+  const n = stampsEl.querySelectorAll('.on').length;
+  meter.forEach((m,i)=>m.classList.toggle('on', i<n));
+  if(n>=3){ status.textContent = n===6 ? '6 / 6 · ALL SIGS CLEARED. LEGEND.' : `${n} / 3 · YOU'RE IN THE DRAW!`; status.classList.add('win');
+    if(!won){ won = true; const r = b.getBoundingClientRect(); burst(r.left+r.width/2, r.top+r.height/2, 60); toast('★ IN THE DRAW · InfBall ticket or merch up for grabs'); } }
+  else { status.textContent = `${n} / 3 STAMPS`; status.classList.remove('win'); won = false; }
+});
+
+/* ---------- terminal intro ---------- */
+const lines = [
+  ['p','$ ','git checkout -b first-years'],
+  ['p','$ ','git commit -m "make CompSoc easier to get into"'],
+  ['ok','','[first-years 1a2b3c] 6 quests, 0 repeated promises'],
+  ['p','$ ','git push origin vote --date=28-10']
+];
+const out = document.getElementById('termOut');
+function renderTerm(n, partial){
+  let h = '';
+  for(let i=0;i<n;i++){ const [c,pre,t]=lines[i]; h += `<div><span class="${c}">${pre}</span>${c==='ok'?`<span class="ok">${t}</span>`:t}</div>`; }
+  if(partial!=null && n<lines.length){ const [c,pre,t]=lines[n]; h += `<div><span class="${c}">${pre}</span>${c==='ok'?`<span class="ok">${t.slice(0,partial)}</span>`:t.slice(0,partial)}<span class="caret"></span></div>`; }
+  else h += '<div><span class="p">$ </span><span class="caret"></span></div>';
+  out.innerHTML = h;
+}
+if(RM){ renderTerm(lines.length); }
+else { let li=0, ci=0; renderTerm(0,0);
+  (function tick(){ if(li>=lines.length){ renderTerm(lines.length); return; }
+    const full = lines[li][2]; ci += lines[li][0]==='ok'? full.length : 1; renderTerm(li, ci);
+    if(ci>=full.length){ li++; ci=0; setTimeout(tick, 420); } else setTimeout(tick, 28 + Math.random()*40);
+  })(); }
+
+/* ---------- countdown ---------- */
+const egm = new Date(2026,9,28); const today = new Date(); today.setHours(0,0,0,0);
+const d = Math.round((egm - today)/864e5);
+const dEl = document.getElementById('days'), lbl = document.getElementById('daysLbl'), vWhen = document.getElementById('vWhen');
+if(d>1){ dEl.textContent = d; } else if(d===1){ dEl.textContent='1'; lbl.textContent='DAY TO THE EGM'; vWhen.textContent='Tomorrow!'; }
+else if(d===0){ dEl.textContent='TODAY'; lbl.textContent='EGM DAY · GO VOTE'; vWhen.textContent='Today. Go vote!'; }
+else { dEl.textContent='GG'; lbl.textContent='THE EGM HAS HAPPENED'; }
+
+/* CONTINUE? 10..0 loop when vote is on screen */
+const cd = document.getElementById('cd'); let cdv = 10, cdTimer = null;
+if(!RM && 'IntersectionObserver' in window){
+  new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting && !cdTimer){ cdTimer = setInterval(()=>{ cdv = cdv<=0 ? 10 : cdv-1; cd.textContent = cdv; }, 1000); }
+    else if(!e.isIntersecting && cdTimer){ clearInterval(cdTimer); cdTimer=null; }
+  })).observe(document.getElementById('vote'));
+}
+
+/* ---------- snow + particles ---------- */
+const cv = document.getElementById('snow'), ctx = cv.getContext('2d');
+let W,H,flakes=[],parts=[],snowColor='rgba(243,241,238,', dpr=1;
+function size(){ dpr=Math.min(2,devicePixelRatio||1); W=innerWidth; H=innerHeight; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+size(); addEventListener('resize', size);
+const N = Math.min(90, Math.round(innerWidth/14));
+for(let i=0;i<N;i++) flakes.push({x:Math.random()*W,y:Math.random()*H,s:(innerWidth<640?[2,2,3,4]:[2,3,4,6])[Math.floor(Math.random()*4)],v:.3+Math.random()*.9,a:.15+Math.random()*.4,ph:Math.random()*6});
+function burst(x,y,n){ const cols=['#C8232E','#F3F1EE','#A3161F','#ffffff'];
+  for(let i=0;i<n;i++){ const a=Math.random()*Math.PI*2, sp=2+Math.random()*6; parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-3,s:4+Math.floor(Math.random()*3)*2,c:cols[i%4],life:70+Math.random()*40}); }
+  if(RM) parts=[]; else if(!running) loop(); }
+window.burst = burst;
+let running=false;
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  flakes.forEach(f=>{ if(!RM){ f.y+=f.v; f.ph+=.01; f.x+=Math.sin(f.ph)*.3; if(f.y>H){f.y=-8;f.x=Math.random()*W;} }
+    ctx.fillStyle = snowColor+f.a+')'; ctx.fillRect(Math.round(f.x),Math.round(f.y),f.s,f.s); });
+  parts = parts.filter(p=>p.life>0);
+  parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=.18; p.vx*=.99; p.life--; ctx.fillStyle=p.c; ctx.globalAlpha=Math.min(1,p.life/30); ctx.fillRect(Math.round(p.x),Math.round(p.y),p.s,p.s); ctx.globalAlpha=1; });
+}
+function loop(){ running=true; draw(); if(!RM || parts.length) requestAnimationFrame(loop); else running=false; }
+if(RM) draw(); else loop();
+
+/* ---------- vote button ---------- */
+const msgs = ["★ VOTE LOCKED IN · See you at G.07 on the 28th","★ COMBO x2 · Tell a friend to sign up on EUSA","★ COMBO x3 · Okay you really mean it. Thank you!"];
+let pressed = 0;
+document.getElementById('yes').addEventListener('click', e=>{
+  const r = e.currentTarget.getBoundingClientRect();
+  burst(r.left+r.width/2, r.top+r.height/2, 90);
+  toast(msgs[Math.min(pressed++, msgs.length-1)]);
+});
+
+/* ---------- toast ---------- */
+const t = document.getElementById('toast'); let tt;
+function toast(m){ t.textContent=m; t.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('show'),2800); }
+
+/* ---------- konami (keyboard) / 5 taps on the sticker (touch) ---------- */
+function cheat(){ snowColor='rgba(200,35,46,'; flakes.forEach(f=>f.a=Math.min(.9,f.a+.3)); burst(W/2,H/2,140); toast('+30 LIVES · Cheat code accepted. Now go vote.'); try{navigator.vibrate&&navigator.vibrate([30,40,30,40,80]);}catch(_){} setTimeout(()=>{snowColor='rgba(243,241,238,'; flakes.forEach(f=>f.a=.15+Math.random()*.4);},6000); }
+if(matchMedia('(hover:none) and (pointer:coarse)').matches){ document.getElementById('egg').textContent = 'Psst: tap the 2026 sticker five times.'; }
+let taps=0, tapT; document.querySelector('.year').addEventListener('click',()=>{ taps++; clearTimeout(tapT); tapT=setTimeout(()=>taps=0,1500); if(taps>=5){ taps=0; cheat(); } });
+const K = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a']; let k=0;
+addEventListener('keydown', e=>{
+  const key = e.key.length===1 ? e.key.toLowerCase() : e.key;
+  k = key===K[k] ? k+1 : (key===K[0]?1:0);
+  if(k===K.length){ k=0; cheat(); }
+});
+})();
+</script>
+</body>
+</html>
