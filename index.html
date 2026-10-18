@@ -61,7 +61,6 @@ a{color:inherit}
 .bar.tight{background-color:var(--chalk);background-image:var(--bgimg);background-attachment:fixed}
 .bar .wrap{display:flex;align-items:center;gap:14px;padding-block:12px;transition:padding .2s steps(3)}
 .bar.tight .wrap{padding-block:7px}
-.xp{position:absolute;left:0;bottom:0;height:var(--px);width:100%;transform-origin:left;transform:scaleX(var(--p,0));background:repeating-linear-gradient(90deg,var(--red-hi) 0 10px,var(--red) 10px 12px);z-index:1}
 .logo{display:flex;align-items:center;gap:10px;font-family:var(--f-arcade);font-size:11px;letter-spacing:.04em;text-decoration:none;white-space:nowrap}
 .logo svg{width:28px;height:28px;flex:none;image-rendering:pixelated}
 .logo b{color:var(--red-hi);font-weight:400}
@@ -435,7 +434,6 @@ body.locked{overflow:hidden}
     <a class="btn vbtn" href="#vote"><span>Vote</span><span class="d" id="barDays">28.10</span></a>
     <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="pm"><i></i></button>
   </div>
-  <div class="xp" id="xp" aria-hidden="true"></div>
 </header>
 
 <div class="pm" id="pm" role="dialog" aria-modal="true" aria-label="Menu" hidden>
@@ -944,7 +942,7 @@ renderSteps();
 
 /* ---------- menu bar: XP bar, scrollspy, ink, pause menu ---------- */
 (function(){
-  const bar=document.getElementById('bar'), xp=document.getElementById('xp'), nav=document.getElementById('nav'), ink=document.getElementById('ink');
+  const bar=document.getElementById('bar'), nav=document.getElementById('nav'), ink=document.getElementById('ink');
   const links=[...nav.querySelectorAll('a')], pmLinks=[...document.querySelectorAll('.pm a.it')];
   const ids=['inventory','quests','map','passport','side','player','vote'];
   const secs=ids.map(id=>document.getElementById(id));
@@ -952,8 +950,7 @@ renderSteps();
   function moveInk(a){ if(!a){ ink.style.width='0'; return; } ink.style.width=a.offsetWidth-16+'px'; ink.style.transform=`translateX(${a.offsetLeft+8}px)`; }
   function update(){
     ticking=false;
-    const y=scrollY, max=document.documentElement.scrollHeight-innerHeight;
-    xp.style.setProperty('--p', max>0 ? Math.min(1,y/max) : 0);
+    const y=scrollY;
     bar.classList.toggle('tight', y>40);
     const line=innerHeight*0.35; let id=null;
     secs.forEach(sec=>{ if(sec && sec.getBoundingClientRect().top<=line) id=sec.id; });
