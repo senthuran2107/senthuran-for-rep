@@ -235,6 +235,40 @@ footer kbd{font-family:var(--f-arcade);font-size:8px;background:var(--chalk-3);p
 .toast{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));margin-inline:auto;width:fit-content;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateY(160%);text-align:center;z-index:70;background:var(--snow);color:var(--chalk);font-family:var(--f-arcade);font-size:10px;line-height:1.7;padding:14px 18px;clip-path:var(--clip);max-width:520px;transition:transform .3s steps(5)}
 .toast.show{transform:none}
 
+/* ===== STAGE CLEAR overlay ===== */
+.sc{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(15,15,17,.82);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.sc[hidden]{display:none!important}
+.sc-box{width:100%;max-width:560px;max-height:100%;overflow-y:auto;overscroll-behavior:contain;background:var(--chalk-2);clip-path:var(--clip);--px:6px;padding:26px 24px 22px;position:relative;animation:scIn .35s steps(5)}
+@keyframes scIn{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.sc-x{position:absolute;top:12px;right:12px;width:40px;height:40px;border:0;background:var(--chalk-3);color:var(--snow);font-family:var(--f-arcade);font-size:12px;cursor:pointer;clip-path:var(--clip);--px:3px}
+.sc-x:hover{background:var(--red)}
+.sc-k{font-family:var(--f-arcade);font-size:9px;line-height:1.6;color:var(--red-hi);margin:0 0 10px;letter-spacing:.08em;padding-right:48px}
+.sc h2{font-size:clamp(1.9rem,8vw,2.8rem);margin:0 0 6px;padding-right:44px}
+.sc-sub{margin:0 0 18px;color:var(--dust);font-size:14px}
+.sc-bar{display:flex;gap:5px;margin:0 0 6px}
+.sc-bar i{flex:1;height:16px;background:var(--chalk-3);transition:background .2s steps(2)}
+.sc-bar i.on{background:var(--red-hi)}
+.sc-pct{font-family:var(--f-arcade);font-size:9px;color:var(--dust);margin:0 0 18px;display:flex;justify-content:space-between}
+.sc-steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.sc-step{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;background:var(--chalk);padding:14px;clip-path:var(--clip);--px:4px;transition:background .2s}
+.sc-step.done{background:#1f2a1f}
+.sc-chk{width:34px;height:34px;display:grid;place-items:center;font-family:var(--f-arcade);font-size:11px;background:var(--chalk-3);color:var(--dust)}
+.sc-step.done .sc-chk{background:#2c4a2c;color:#9fe09f}
+.sc-step b{display:block;font-family:var(--f-display);font-size:1.05rem;line-height:1.2;margin-bottom:4px}
+.sc-step p{margin:0 0 10px;font-size:13px;color:var(--dust)}
+.sc-acts{display:flex;flex-wrap:wrap;gap:8px}
+.sc-a{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-arcade);font-size:9px;line-height:1.3;color:var(--snow);background:var(--red);border:0;padding:11px 12px;text-decoration:none;cursor:pointer;clip-path:var(--clip);--px:3px;box-shadow:inset 0 -3px 0 var(--red-lo)}
+.sc-a:hover{background:var(--red-hi)}
+.sc-a.alt{background:var(--chalk-3);box-shadow:inset 0 -3px 0 #232326}
+.sc-a.alt:hover{background:#47474c}
+.sc-badge{margin-top:16px;display:grid;grid-template-columns:110px 1fr;gap:14px;align-items:center;background:var(--chalk);padding:14px;clip-path:var(--clip);--px:4px}
+.sc-badge canvas{width:110px;height:auto;aspect-ratio:4/5;max-width:100%;image-rendering:pixelated;display:block;background:var(--chalk-2)}
+.sc-badge b{display:block;font-family:var(--f-display);font-size:1.05rem;margin-bottom:4px}
+.sc-badge p{margin:0 0 10px;font-size:13px;color:var(--dust)}
+.sc-win{margin:16px 0 0;font-family:var(--f-arcade);font-size:10px;line-height:1.8;color:var(--red-hi);text-align:center}
+@media (max-width:420px){.sc-box{padding:22px 16px 18px}.sc-badge{grid-template-columns:84px 1fr}.sc-badge canvas{width:84px}.sc-step{grid-template-columns:28px 1fr;gap:10px;padding:12px}.sc-chk{width:28px;height:28px;font-size:9px}}
+body.locked{overflow:hidden}
+
 .tag,.legend i{font-style:normal}
 
 /* quest carousel dots (phone only) */
@@ -527,6 +561,40 @@ footer kbd{font-family:var(--f-arcade);font-size:8px;background:var(--chalk-3);p
   </footer>
 </main>
 
+
+<div class="sc" id="sc" role="dialog" aria-modal="true" aria-labelledby="scTitle" hidden>
+  <div class="sc-box">
+    <button class="sc-x" id="scX" type="button" aria-label="Close">✕</button>
+    <p class="sc-k">★ STAGE CLEAR · VOTE LOCKED IN</p>
+    <h2 id="scTitle">Make it count</h2>
+    <p class="sc-sub">Pressing a button on a website doesn't count as a vote (sadly). Three quick things make sure your real one does.</p>
+    <div class="sc-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+    <p class="sc-pct"><span id="scPct">0 / 3 DONE</span><span>28.10 · G.07</span></p>
+    <ol class="sc-steps">
+      <li class="sc-step" data-step="join">
+        <span class="sc-chk">1</span>
+        <div><b>Join CompSoc on EUSA</b><p>It's free, and only members can vote. Takes a minute with your uni login.</p>
+          <div class="sc-acts"><a class="sc-a" id="aJoin" href="https://www.eusa.ed.ac.uk/activities/view/compsoc" target="_blank" rel="noopener">▶ JOIN FREE</a><button class="sc-a alt" type="button" data-mark="join">ALREADY A MEMBER</button></div></div>
+      </li>
+      <li class="sc-step" data-step="date">
+        <span class="sc-chk">2</span>
+        <div><b>Save the date</b><p>Wednesday 28 October, G.07 Informatics Forum. Online voting works too.</p>
+          <div class="sc-acts"><a class="sc-a" id="aGcal" target="_blank" rel="noopener">▶ GOOGLE CAL</a><button class="sc-a alt" type="button" id="aIcs">APPLE / OUTLOOK</button></div></div>
+      </li>
+      <li class="sc-step" data-step="share">
+        <span class="sc-chk">3</span>
+        <div><b>Bring a friend</b><p>Send this to one first year who hasn't joined yet.</p>
+          <div class="sc-acts"><button class="sc-a" type="button" id="aShare">▶ SHARE</button><a class="sc-a alt" id="aWa" target="_blank" rel="noopener">WHATSAPP</a><button class="sc-a alt" type="button" id="aCopy">COPY LINK</button></div></div>
+      </li>
+    </ol>
+    <div class="sc-badge">
+      <canvas id="badge" width="1080" height="1350" aria-label="Your I'm voting Senthuran badge"></canvas>
+      <div><b>Bonus: voter badge</b><p>A pixel badge for your Insta story or Discord.</p>
+        <div class="sc-acts"><button class="sc-a" type="button" id="aBadge">▶ GET BADGE</button></div></div>
+    </div>
+    <p class="sc-win" id="scWin" hidden>★ 100% · ACHIEVEMENT UNLOCKED: GOOD CITIZEN ★<br>See you on the 28th.</p>
+  </div>
+</div>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
@@ -693,14 +761,125 @@ function draw(){
 function loop(){ running=true; draw(); if(!RM || parts.length) requestAnimationFrame(loop); else running=false; }
 if(RM) draw(); else loop();
 
-/* ---------- vote button ---------- */
-const msgs = ["★ VOTE LOCKED IN · See you at G.07 on the 28th","★ COMBO x2 · Tell a friend to sign up on EUSA","★ COMBO x3 · Okay you really mean it. Thank you!"];
-let pressed = 0;
-document.getElementById('yes').addEventListener('click', e=>{
+/* ---------- vote button → STAGE CLEAR ---------- */
+const SITE = 'https://senthuran-for-rep.vercel.app';
+const SHARE_TXT = "I'm voting Senthuran for CompSoc 1st Year Rep. EGM is Wed 28 Oct, G.07 Informatics Forum (or online). Join CompSoc free on EUSA so you can vote:";
+const sc = document.getElementById('sc'), yes = document.getElementById('yes');
+const store = { get(k){ try{ return JSON.parse(localStorage.getItem(k)||'null'); }catch(_){ return null; } }, set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(_){} } };
+let done = store.get('sen-steps') || {};
+let lastFocus = null, celebrated = !!store.get('sen-celebrated');
+
+function renderSteps(){
+  const n = ['join','date','share'].filter(k=>done[k]).length;
+  document.querySelectorAll('.sc-step').forEach(li=>{ const d=!!done[li.dataset.step]; li.classList.toggle('done',d); li.querySelector('.sc-chk').textContent = d ? '✓' : {join:1,date:2,share:3}[li.dataset.step]; });
+  document.querySelectorAll('.sc-bar i').forEach((b,i)=>b.classList.toggle('on',i<n));
+  document.getElementById('scPct').textContent = n===3 ? '3 / 3 · 100%' : `${n} / 3 DONE`;
+  document.getElementById('scWin').hidden = n<3;
+  yes.textContent = n===3 ? '★ VOTE READY · 100%' : '▶ YES · VOTE SENTHURAN';
+  return n;
+}
+function mark(k){
+  if(done[k]) return; done[k]=true; store.set('sen-steps',done);
+  const li = document.querySelector(`.sc-step[data-step="${k}"]`); const r = li.getBoundingClientRect();
+  burst(r.left+30, r.top+30, 24); try{ navigator.vibrate&&navigator.vibrate(20); }catch(_){}
+  if(renderSteps()===3 && !celebrated){ celebrated=true; store.set('sen-celebrated',true); setTimeout(()=>{ burst(W/2,H/3,160); try{navigator.vibrate&&navigator.vibrate([40,40,40,40,120]);}catch(_){} },250); }
+}
+function openSC(){
+  lastFocus = document.activeElement; sc.hidden = false; document.body.classList.add('locked');
+  drawBadge(document.getElementById('badge'));
+  setTimeout(()=>document.getElementById('scX').focus(), 50);
+}
+function closeSC(){ sc.hidden = true; document.body.classList.remove('locked'); lastFocus && lastFocus.focus && lastFocus.focus(); }
+yes.addEventListener('click', e=>{
   const r = e.currentTarget.getBoundingClientRect();
   burst(r.left+r.width/2, r.top+r.height/2, 90);
-  toast(msgs[Math.min(pressed++, msgs.length-1)]);
+  setTimeout(openSC, RM ? 0 : 450);
 });
+document.getElementById('scX').addEventListener('click', closeSC);
+sc.addEventListener('click', e=>{ if(e.target===sc) closeSC(); });
+addEventListener('keydown', e=>{
+  if(sc.hidden) return;
+  if(e.key==='Escape'){ closeSC(); return; }
+  if(e.key==='Tab'){ const f=[...sc.querySelectorAll('a[href],button')]; const a=f[0], z=f[f.length-1];
+    if(e.shiftKey && document.activeElement===a){ e.preventDefault(); z.focus(); } else if(!e.shiftKey && document.activeElement===z){ e.preventDefault(); a.focus(); } }
+});
+
+/* step 1 */
+document.getElementById('aJoin').addEventListener('click', ()=>setTimeout(()=>mark('join'),400));
+sc.querySelector('[data-mark="join"]').addEventListener('click', ()=>mark('join'));
+
+/* step 2: calendar (all-day, date only — time not announced) */
+const gcal = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+  + '&text=' + encodeURIComponent('CompSoc EGM · Vote Senthuran for 1st Year Rep')
+  + '&dates=20261028/20261029'
+  + '&location=' + encodeURIComponent('G.07, Informatics Forum, 10 Crichton St, Edinburgh EH8 9AB')
+  + '&details=' + encodeURIComponent('CompSoc EGM. Vote in person in G.07 or online. You need to be a CompSoc member on EUSA (free): https://www.eusa.ed.ac.uk/activities/view/compsoc\n\nManifesto: ' + SITE);
+const aG = document.getElementById('aGcal'); aG.href = gcal; aG.addEventListener('click', ()=>setTimeout(()=>mark('date'),400));
+document.getElementById('aIcs').addEventListener('click', ()=>{
+  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//senthuran-for-rep//EN','CALSCALE:GREGORIAN','BEGIN:VEVENT',
+    'UID:compsoc-egm-20261028@senthuran-for-rep.vercel.app','DTSTAMP:20261018T120000Z',
+    'DTSTART;VALUE=DATE:20261028','DTEND;VALUE=DATE:20261029',
+    'SUMMARY:CompSoc EGM · Vote Senthuran for 1st Year Rep',
+    'LOCATION:G.07\\, Informatics Forum\\, 10 Crichton St\\, Edinburgh EH8 9AB',
+    'DESCRIPTION:Vote in person in G.07 or online. You need to be a CompSoc member on EUSA (free): https://www.eusa.ed.ac.uk/activities/view/compsoc\\n\\nManifesto: '+SITE,
+    'URL:'+SITE,'BEGIN:VALARM','TRIGGER:-PT15H','ACTION:DISPLAY','DESCRIPTION:CompSoc EGM tomorrow · Vote Senthuran','END:VALARM',
+    'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  saveBlob(new Blob([ics],{type:'text/calendar'}), 'compsoc-egm.ics');
+  mark('date');
+});
+
+/* step 3: share */
+const wa = document.getElementById('aWa'); wa.href = 'https://wa.me/?text=' + encodeURIComponent(SHARE_TXT + ' ' + SITE);
+wa.addEventListener('click', ()=>setTimeout(()=>mark('share'),400));
+document.getElementById('aShare').addEventListener('click', async ()=>{
+  if(navigator.share){ try{ await navigator.share({title:'Vote Senthuran for 1st Year Rep', text:SHARE_TXT, url:SITE}); mark('share'); }catch(err){ if(err && err.name!=='AbortError') copyLink(); } }
+  else copyLink();
+});
+document.getElementById('aCopy').addEventListener('click', copyLink);
+async function copyLink(){
+  const txt = SHARE_TXT + ' ' + SITE;
+  try{ await navigator.clipboard.writeText(txt); toast('★ LINK COPIED · Paste it in a group chat'); mark('share'); }
+  catch(_){ const ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); let ok=false; try{ ok=document.execCommand('copy'); }catch(_){} ta.remove(); toast(ok?'★ LINK COPIED · Paste it in a group chat':'Copy failed. The link is '+SITE); if(ok) mark('share'); }
+}
+
+/* bonus: badge */
+function saveBlob(blob, name){ const u=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); }
+function drawBadge(cv){
+  const c = cv.getContext('2d'), w=cv.width, h=cv.height;
+  c.imageSmoothingEnabled=false;
+  c.fillStyle='#252527'; c.fillRect(0,0,w,h);
+  // pixel snow
+  let seed=7; const rnd=()=>{ seed=(seed*16807)%2147483647; return seed/2147483647; };
+  for(let i=0;i<140;i++){ const s=[6,9,12,18][Math.floor(rnd()*4)], x=Math.floor(rnd()*w), y=Math.floor(rnd()*h); if(x<1020 && ((y>150&&y<790)||(y>1090&&y<1320))) continue; c.fillStyle=`rgba(243,241,238,${.08+rnd()*.3})`; c.fillRect(x,y,s,s); }
+  const notch=(x,y,ww,hh,p,col,shadow)=>{ c.fillStyle=col; c.fillRect(x+p*2,y,ww-p*4,hh); c.fillRect(x+p,y+p,ww-p*2,hh-p*2); c.fillRect(x,y+p*2,ww,hh-p*4); if(shadow){ c.fillStyle=shadow; c.fillRect(x+p*2,y+hh-p,ww-p*4,p); } };
+  const txt=(t,x,y,size,col,font,align='left',shadow)=>{ c.font=`${size}px ${font}`; c.textAlign=align; c.textBaseline='alphabetic'; if(shadow){ c.fillStyle=shadow; c.fillText(t,x+size*.08,y+size*.08); } c.fillStyle=col; c.fillText(t,x,y); };
+  const D='"Silkscreen","Press Start 2P",monospace', A='"Press Start 2P","Silkscreen",monospace';
+  txt("I'M VOTING",80,250,96,'#F3F1EE',D,'left','#000');
+  notch(60,300,960,230,16,'#A3161F','#6E0D14');
+  c.save(); c.font=`700 150px ${D}`; const tw=c.measureText('SENTHURAN').width; c.restore();
+  const fs = Math.min(150, 150*840/tw);
+  c.font=`700 ${fs}px ${D}`; c.textAlign='center'; c.fillStyle='#6E0D14'; c.fillText('SENTHURAN',548,462); c.fillStyle='#F3F1EE'; c.fillText('SENTHURAN',540,454);
+  txt('FOR 1ST YEAR REP',80,650,72,'#F3F1EE',D);
+  txt('COMPSOC EGM',80,750,72,'#C8232E',D);
+  // ballot box sprite
+  const px=22, ox=660, oy=830, B=['....wwww....','....wxxw....','....wwww....','wwwwwwwwwwww','wddddddddddw','wxxxxxxxxxxw','wxxwwwwwxxxw','wxxxxxxxxxxw','wxxxxxxxxxxw','wddddddddddw'];
+  const col={w:'#F3F1EE',x:'#C8232E',d:'#6E0D14'}; B.forEach((r,y)=>[...r].forEach((ch,x)=>{ if(col[ch]){ c.fillStyle=col[ch]; c.fillRect(ox+x*px,oy+y*px,px,px); } }));
+  notch(80,1110,440,96,10,'#F3F1EE','#bdb8b1');
+  txt('WED 28 OCT',300,1176,34,'#A3161F',A,'center');
+  txt('G.07 · INFORMATICS FORUM',80,1270,30,'#A9A6A2',A);
+  txt('senthuran-for-rep.vercel.app',1000,1310,26,'#6f6c69','"JetBrains Mono",monospace','right');
+}
+document.getElementById('aBadge').addEventListener('click', ()=>{
+  const cv=document.getElementById('badge'); drawBadge(cv);
+  cv.toBlob(async blob=>{
+    if(!blob){ toast('Could not make the badge. Try again.'); return; }
+    const file = new File([blob],'voting-senthuran.png',{type:'image/png'});
+    if(navigator.canShare && navigator.canShare({files:[file]})){ try{ await navigator.share({files:[file], title:"I'm voting Senthuran", text:SITE}); toast('★ BADGE SHARED'); return; }catch(err){ if(err && err.name==='AbortError') return; } }
+    saveBlob(blob,'voting-senthuran.png'); toast('★ BADGE SAVED · Check your downloads');
+  },'image/png');
+});
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>{ if(!sc.hidden) drawBadge(document.getElementById('badge')); });
+renderSteps();
 
 /* ---------- toast ---------- */
 const t = document.getElementById('toast'); let tt;
