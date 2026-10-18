@@ -9,16 +9,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Press+Start+2P&family=JetBrains+Mono:wght@400;600;800&display=swap">
-<meta name="description" content="Senthuran Srimurugan for CompSoc 1st Year Rep: six quests to help first years build real things, get into the SIGs and get a head start. Vote Wed 28 Oct, G.07 Informatics Forum.">
+<meta name="description" content="Senthuran Srimurugan for CompSoc 1st Year Rep: doing the job properly — lecture shout-outs, coursework nights, a way into every SIG, InfBall crew and feedback that goes somewhere. Vote Wed 28 Oct, 19:20, G.07 Informatics Forum.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Vote Senthuran for 1st Year Rep">
-<meta property="og:description" content="Senthuran Srimurugan for CompSoc 1st Year Rep: six quests to help first years build real things, get into the SIGs and get a head start. Vote Wed 28 Oct, G.07 Informatics Forum.">
+<meta property="og:description" content="Senthuran Srimurugan for CompSoc 1st Year Rep: doing the job properly — lecture shout-outs, coursework nights, a way into every SIG, InfBall crew and feedback that goes somewhere. Vote Wed 28 Oct, 19:20, G.07 Informatics Forum.">
 <meta property="og:image" content="/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%23252527'/%3E%3Crect x='1' y='2' width='6' height='4' fill='%23A3161F'/%3E%3Crect x='2' y='3' width='1' height='1' fill='%23F3F1EE'/%3E%3Crect x='5' y='3' width='1' height='1' fill='%23F3F1EE'/%3E%3C/svg%3E">
 <style>
-/* Layout: a chalkboard arcade cabinet. Pixel hero → inventory → six quests → level map → passport demo → player card → vote screen. Single dark world by choice. */
+/* Layout: a chalkboard arcade cabinet. Pixel hero → inventory → six quests → level map → SIG scout → player card → vote screen. Single dark world by choice. */
 :root{
   --chalk:#252527;      /* board */
   --chalk-2:#2f2f32;    /* raised panel */
@@ -308,6 +308,21 @@ footer kbd{font-family:var(--f-arcade);font-size:8px;background:var(--chalk-3);p
 @media (max-width:420px){.sc-box{padding:22px 16px 18px}.sc-badge{grid-template-columns:84px 1fr}.sc-badge canvas{width:84px}.sc-step{grid-template-columns:28px 1fr;gap:10px;padding:12px}.sc-chk{width:28px;height:28px;font-size:9px}}
 body.locked{overflow:hidden}
 
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.chip{font-family:var(--f-arcade);font-size:9px;line-height:1.3;color:var(--dust);background:var(--chalk-2);border:0;padding:11px 12px;cursor:pointer;clip-path:var(--clip);--px:3px}
+.chip:hover{color:var(--snow)}
+.chip.on{background:var(--red);color:var(--snow);box-shadow:inset 0 -3px 0 var(--red-lo)}
+.sigs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:900px){.sigs{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.sigs{grid-template-columns:repeat(2,1fr);gap:8px}}
+.sig{background:var(--chalk-2);clip-path:var(--clip);padding:16px;min-width:0;display:flex;flex-direction:column;gap:6px;transition:opacity .2s,transform .15s steps(2)}
+.sig b{font-family:var(--f-display);font-size:1.05rem;line-height:1.15;overflow-wrap:anywhere}
+.sig span{font-size:13px;color:var(--dust);line-height:1.45}
+.sig em{margin-top:auto;padding-top:8px;font-style:normal;font-family:var(--f-arcade);font-size:7px;color:var(--red-hi);letter-spacing:.06em}
+.sig.dim{opacity:.22}
+.sig:not(.dim):hover{transform:translateY(-3px)}
+#passport .note{margin:14px 0 0}
+@media (max-width:640px){.sig{padding:12px}.sig b{font-size:.95rem}.sig span{font-size:12px}}
 .tag,.legend i{font-style:normal}
 
 /* quest carousel dots (phone only) */
@@ -427,7 +442,7 @@ body.locked{overflow:hidden}
       <a href="#inventory"><span class="lv">L0</span>Intro</a>
       <a href="#quests"><span class="lv">L1</span>Quests</a>
       <a href="#map"><span class="lv">L2</span>Map</a>
-      <a href="#passport"><span class="lv">L3</span>Passport</a>
+      <a href="#passport"><span class="lv">L3</span>SIGs</a>
       <a href="#player"><span class="lv">P1</span>Player</a>
       <span class="ink" id="ink" aria-hidden="true"></span>
     </nav>
@@ -440,15 +455,15 @@ body.locked{overflow:hidden}
   <div class="pm-top"><p><span>▮</span> PAUSED</p><button class="pm-x" id="pmX" type="button" aria-label="Close menu">✕</button></div>
   <h2>Select level</h2>
   <ol>
-    <li><a class="it" href="#inventory"><span class="n">L0</span><span><b>Intro</b><small>What already exists</small></span><span class="go">▶</span></a></li>
-    <li><a class="it" href="#quests"><span class="n">L1</span><span><b>Quests</b><small>Six things I want to do</small></span><span class="go">▶</span></a></li>
+    <li><a class="it" href="#inventory"><span class="n">L0</span><span><b>Intro</b><small>What CompSoc already runs</small></span><span class="go">▶</span></a></li>
+    <li><a class="it" href="#quests"><span class="n">L1</span><span><b>Quests</b><small>Six things I'll actually do</small></span><span class="go">▶</span></a></li>
     <li><a class="it" href="#map"><span class="n">L2</span><span><b>World map</b><small>When it all happens</small></span><span class="go">▶</span></a></li>
-    <li><a class="it" href="#passport"><span class="n">L3</span><span><b>SIG Passport</b><small>Try the stamp demo</small></span><span class="go">▶</span></a></li>
+    <li><a class="it" href="#passport"><span class="n">L3</span><span><b>SIG Scout</b><small>Find your SIG</small></span><span class="go">▶</span></a></li>
     <li><a class="it" href="#side"><span class="n">SQ</span><span><b>Side quests</b><small>The normal rep stuff</small></span><span class="go">▶</span></a></li>
     <li><a class="it" href="#player"><span class="n">P1</span><span><b>Player</b><small>About me</small></span><span class="go">▶</span></a></li>
   </ol>
-  <a class="btn pm-cta" href="#vote">▶ VOTE · WED 28 OCT</a>
-  <p class="pm-foot">G.07 · INFORMATICS FORUM · OR ONLINE<br>COMPSOC MEMBERS ONLY · JOIN FREE ON EUSA</p>
+  <a class="btn pm-cta" href="#vote">▶ VOTE · WED 28 OCT · 19:20</a>
+  <p class="pm-foot">G.07 · INFORMATICS FORUM · 19:20 · OR ONLINE<br>COMPSOC MEMBERS ONLY · JOIN FREE ON EUSA</p>
 </div>
 
 <main id="top">
@@ -476,25 +491,26 @@ body.locked{overflow:hidden}
       <div class="sec-head">
         <div>
           <p class="kicker">LEVEL 0 · CHECK YOUR INVENTORY</p>
-          <h2>Before promising anything, I checked what already exists.</h2>
+          <h2>I read 10 years of committee minutes first.</h2>
         </div>
-        <p class="lede">CompSoc has loads first years would love, but a lot of it is set up for people who already know their way around. For coursework we're actually <b>pretty well covered</b>, so I'm not promising that again.</p>
+        <p class="lede">CompSoc already runs a lot, so this manifesto doesn't promise any of it again. What I'm promising is <b>the 1st Year Rep's actual job</b>: being the link between our year and the society, done properly.</p>
       </div>
       <div class="inv">
         <div class="panel got">
           <h3>ALREADY IN YOUR INVENTORY</h3>
           <ul class="slots">
-            <li><span class="ic">✓</span><div><b>InfPALS</b><span>Study groups for our courses.</span></div></li>
-            <li><span class="ic">✓</span><div><b>Academic Families</b><span>Pairs us with older students.</span></div></li>
-            <li><span class="ic">✓</span><div><b>Better Informatics</b><span>Past paper answers and notes.</span></div></li>
+            <li><span class="ic">✓</span><div><b>FamHack</b><span>The Academic Families hackathon, built for first years.</span></div></li>
+            <li><span class="ic">✓</span><div><b>Weekly newsletter &amp; events page</b><span>What's on, every Monday.</span></div></li>
+            <li><span class="ic">✓</span><div><b>12 SIGs</b><span>From cybersecurity to type theory, all running weekly.</span></div></li>
+            <li><span class="ic">✓</span><div><b>InfPALS, Better Informatics</b><span>Study groups, past paper answers, notes.</span></div></li>
           </ul>
         </div>
         <div class="panel miss">
           <h3>MISSING ITEMS · WHAT I'LL FOCUS ON</h3>
           <ul class="slots">
-            <li><span class="ic">?</span><div><b>Building real things</b><span>Projects, hackathons, stuff on the actual internet.</span></div></li>
-            <li><span class="ic">?</span><div><b>Getting into the SIGs</b><span>12 of them. Most of us have been to one, if any.</span></div></li>
-            <li><span class="ic">?</span><div><b>A head start on opportunities</b><span>Insight days, CTFs, first-year programmes.</span></div></li>
+            <li><span class="ic">?</span><div><b>Actually hearing about it</b><span>Most of us find out about events after they've happened.</span></div></li>
+            <li><span class="ic">?</span><div><b>A low-key way in</b><span>A 200-person STMU isn't the easiest place to meet people.</span></div></li>
+            <li><span class="ic">?</span><div><b>Enough hands</b><span>InfBall and the big events always need more help.</span></div></li>
           </ul>
         </div>
       </div>
@@ -506,11 +522,11 @@ body.locked{overflow:hidden}
       <div class="sec-head">
         <div>
           <p class="kicker">LEVEL 1 · SELECT YOUR QUEST</p>
-          <h2>Six things I want to do</h2>
+          <h2>Six things I'll actually do</h2>
         </div>
         <div class="legend">
           <span><i class="tag solo">SOLO</i> I can just go and do it</span>
-          <span><i class="tag coop">CO-OP</i> Needs committee or a SIG on board</span>
+          <span><i class="tag coop">CO-OP</i> Working with committee</span>
         </div>
       </div>
       <div class="quests" id="questGrid"></div>
@@ -528,31 +544,26 @@ body.locked{overflow:hidden}
         <p class="lede">I'll post progress on every quest, so you can see what's happened and what hasn't.</p>
       </div>
       <div class="map">
-        <div class="stop now"><div class="node">1-1</div><p class="lbl">28 OCT</p><h4>EGM</h4><ul><li>You vote</li></ul></div>
-        <div class="stop"><div class="node">1-2</div><p class="lbl">+2 WEEKS · NOV</p><h4>Board goes up</h4><ul><li>Opportunities list pinned on Discord</li><li>Pitch First Commit to committee</li><li>Push for SIG Passport</li></ul></div>
-        <div class="stop"><div class="node">1-3</div><p class="lbl">END OF SEM 1</p><h4>Ship It</h4><ul><li>Workshop with Tardis, if they're up for it</li></ul></div>
-        <div class="stop"><div class="node">2-1</div><p class="lbl">SEMESTER 2</p><h4>Boss rush</h4><ul><li>SIG Passport launches</li><li>First Commit build night</li><li>First PR night</li><li>Hackathon road trips</li></ul></div>
+        <div class="stop now"><div class="node">1-1</div><p class="lbl">WED 28 OCT · 19:20</p><h4>EGM</h4><ul><li>You vote</li></ul></div>
+        <div class="stop"><div class="node">1-2</div><p class="lbl">WEEK 1</p><h4>Start the job</h4><ul><li>First lecture shout-outs in IP and CAFI</li><li>Feedback form goes live</li><li>Join the InfBall team</li></ul></div>
+        <div class="stop"><div class="node">1-3</div><p class="lbl">NOVEMBER</p><h4>Scout &amp; crew</h4><ul><li>SIG scout reports start</li><li>Volunteer at the Winter event (28 Nov)</li><li>Pitch coursework nights to committee</li></ul></div>
+        <div class="stop"><div class="node">2-1</div><p class="lbl">SEMESTER 2</p><h4>Boss rush</h4><ul><li>Coursework nights, if committee backs them</li><li>Get first years to FamHack</li><li>InfBall in April</li></ul></div>
       </div>
     </div>
   </section>
 
   <section id="passport">
     <div class="wrap">
-      <div class="pass">
+      <div class="sec-head">
         <div>
-          <p class="kicker">LEVEL 3 · TRY IT YOURSELF</p>
-          <h2>SIG Passport</h2>
-          <p class="lede" style="margin-top:16px">In semester 2 you collect a stamp, a Discord role from the bots CompSoc already runs, for each different SIG you try. <b>Get three and you're in a draw</b> for something actually good, like an InfBall ticket or CompSoc merch.</p>
-          <p class="lede" style="margin-top:12px">It gets people into SIGs they'd never have walked into, and the SIGs get new members out of it too.</p>
+          <p class="kicker">LEVEL 3 · FIND YOUR SIG</p>
+          <h2>SIG Scout</h2>
         </div>
-        <div class="book">
-          <div class="book-head"><b>PASSPORT · 1ST YEAR</b><span>Tap a SIG to stamp it</span></div>
-          <div class="stamps" id="stamps"></div>
-          <div class="meter" aria-hidden="true"><i></i><i></i><i></i></div>
-          <p class="pass-status" id="passStatus" aria-live="polite">0 / 3 STAMPS</p>
-          <p class="note" style="color:#5b5455;margin:0;position:relative">Demo only. The real one runs on Discord roles.</p>
-        </div>
+        <p class="lede">CompSoc has 12 SIGs, and walking into one where you know nobody is scary. I'll go to every one and tell our year honestly <b>which sessions are beginner-friendly</b>. Pick what you're into to see where to start.</p>
       </div>
+      <div class="chips" id="chips" role="group" aria-label="Filter SIGs by interest"></div>
+      <div class="sigs" id="sigs"></div>
+      <p class="note">Scout reports start in November. Session times are on the CompSoc Discord.</p>
     </div>
   </section>
 
@@ -565,10 +576,10 @@ body.locked{overflow:hidden}
         </div>
       </div>
       <ul class="side">
-        <li>Keep first years updated on what's coming up through the Discord.</li>
-        <li>Keep a feedback form open all year, and take what you tell me to committee.</li>
-        <li>Help out with InfBall and the other big events, and get more first years involved.</li>
-        <li>Post progress on everything, and be honest about what I can just do and what needs committee to agree.</li>
+        <li>Promote STMUs, Hack the Burgh and the AGM to our year, through the proper announcement queue.</li>
+        <li>Turn up to committee meetings every week and bring what first years are saying.</li>
+        <li>Help at open days and offer holder days, so next year's first years hear about CompSoc early.</li>
+        <li>Post progress on everything, and be honest about what I can do alone and what needs committee to agree.</li>
       </ul>
     </div>
   </section>
@@ -580,7 +591,7 @@ body.locked{overflow:hidden}
         <svg class="avatar" id="avatar" viewBox="0 0 16 16" aria-hidden="true" shape-rendering="crispEdges"></svg>
         <div class="player-body">
           <h3>Senthuran Srimurugan</h3>
-          <p>Hi! I'm a first year doing CS. I'm really into hackathons and I've started doing freelance web development, so building things and getting people together is kind of my thing. Message me with ideas, complaints, anything.</p>
+          <p>Hi! I'm a first year doing CS. I'm into hackathons and I do freelance web development (I built this site). I'm easy to talk to and I reply fast, so message me with ideas, complaints, anything.</p>
           <dl class="stats">
             <div class="stat"><dt>CLASS</dt><dd>Computer Science (BEng Hons)</dd></div>
             <div class="stat"><dt>LEVEL</dt><dd>1st year</dd></div>
@@ -599,7 +610,7 @@ body.locked{overflow:hidden}
         <p class="kicker">FINAL LEVEL</p>
         <h2>CONTINUE? <span id="cd" style="white-space:nowrap">10</span></h2>
         <div class="vote-grid">
-          <div class="vbox"><b>WHEN</b><span>Wednesday 28th October</span><small id="vWhen">At the CompSoc EGM</small></div>
+          <div class="vbox"><b>WHEN</b><span>Wed 28 October, 19:20</span><small id="vWhen">Straight after the 17:00 STMU and pizza</small></div>
           <div class="vbox"><b>WHERE</b><span>G.07, Informatics Forum</span><small>Or vote online</small></div>
           <div class="vbox"><b>YOU NEED</b><span>CompSoc membership on EUSA</span><small>It's free. Sign up before the day.</small></div>
         </div>
@@ -627,7 +638,7 @@ body.locked{overflow:hidden}
     <h2 id="scTitle">Make it count</h2>
     <p class="sc-sub">Pressing a button on a website doesn't count as a vote (sadly). Three quick things make sure your real one does.</p>
     <div class="sc-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-    <p class="sc-pct"><span id="scPct">0 / 3 DONE</span><span>28.10 · G.07</span></p>
+    <p class="sc-pct"><span id="scPct">0 / 3 DONE</span><span>28.10 · 19:20 · G.07</span></p>
     <ol class="sc-steps">
       <li class="sc-step" data-step="join">
         <span class="sc-chk">1</span>
@@ -636,7 +647,7 @@ body.locked{overflow:hidden}
       </li>
       <li class="sc-step" data-step="date">
         <span class="sc-chk">2</span>
-        <div><b>Save the date</b><p>Wednesday 28 October, G.07 Informatics Forum. Online voting works too.</p>
+        <div><b>Save the date</b><p>Wednesday 28 October, 19:20 in G.07, Informatics Forum, after the 17:00 STMU. Online voting works too.</p>
           <div class="sc-acts"><a class="sc-a" id="aGcal" target="_blank" rel="noopener">▶ GOOGLE CAL</a><button class="sc-a alt" type="button" id="aIcs">APPLE / OUTLOOK</button></div></div>
       </li>
       <li class="sc-step" data-step="share">
@@ -670,32 +681,32 @@ function svg(map,cls){ const s = sprite(map); return `<svg class="${cls}" viewBo
 
 /* ---------- quests ---------- */
 const S = {
-  laptop:["..........",".wwwwwwww.",".wgggggww.",".wgxxgggw.",".wgggxxgw.",".wggggggw.",".wwwwwwww.","wwwwwwwwww","wddddddddw",".........."],
-  rocket:["....xx....","...xwwx...","...xwgx...","...xwwx...","..xxwwxx..",".x.xwwx.x.","x..xxxx..x","....ww....","...w..w...","....ww...."],
-  stamp:["...xxxx...","...xxxx...","....xx....","....xx....",".wwwwwwww.",".wxxxxxxw.",".wwwwwwww.","..........","x.x.x.x.x.",".x.x.x.x.x"],
-  board:["wwwwwwwwww","w....x...w","w.xx.....w","w....www.w","w.xx.....w","w....www.w","w.xx.....w","w....www.w","wwwwwwwwww","...w..w..."],
-  bus:["..........",".xxxxxxxx.",".xwwxwwxx.",".xwwxwwxx.",".xxxxxxxx.",".xxxxxxxx.",".xxxxxxxxw","..ww..ww..","..ww..ww..",".........."],
-  branch:["..w.......",".www......","..w....x..","..w...xxx.","..w....x..","..w...x...","..w..x....","..wxx.....",".www......","..w......."]
+  mic:["....ww....","...wwww...","...wxxw...","...wwww...","...wwww...",".w.wwww.w.",".w..ww..w.","..w....w..","....ww....","..wwwwww.."],
+  lamp:["...xxxx...","..xxxxxx..",".xxxxxxxx.","....ww....","....ww....","wwwwwwwwww","w.xx..xx.w","w.xx..xx.w","wwwwwwwwww",".w......w."],
+  scope:["..........",".www..www.","wxxxwwxxxw","wxwxwwxwxw","wxxxwwxxxw",".www..www.","..........","...w..w...","..w....w..",".........."],
+  ball:["....xx....","...xwwx...","..xwwwwx..","..xwxxwx..","...xwwx...","....xx....","..x.ww.x..",".x..ww..x.","....ww....","...wwww..."],
+  loop:["..wwwwww..",".w......w.","w..xx....w","w.x..x...x","w....x..xw","w...x...w.",".w..x..w..","..w.....w.","...wwwww..","....x....."],
+  laptop:["..........",".wwwwwwww.",".wgggggww.",".wgxxgggw.",".wgggxxgw.",".wggggggw.",".wwwwwwww.","wwwwwwwwww","wddddddddw",".........."]
 };
 const Q = [
-  {s:'laptop', t:'First Commit', sub:'A first-years-only build night', tag:'coop',
-   p:"Hack the Burgh is amazing, but 24 hours with 300 people is a big first step. Around 6 hours, teams you pick or get put in, HackSIG members walking round to help, quick demos at the end. You don't need to know anything going in. Best projects show off at Project Share.",
-   w:'Pitch to committee in November, run early semester 2. A practice run before Hack the Burgh XIV.'},
-  {s:'rocket', t:'Ship It', sub:'Get your first project online', tag:'coop',
-   p:"Most of us have written code for coursework, but not many have put anything on the internet. I build websites for small businesses on the side, so I'd run a workshop with the Tardis Project where everyone leaves with a site live on CompSoc's own servers. Nice on a CV too.",
-   w:'Before the end of semester 1 if Tardis are up for it, otherwise early semester 2.'},
-  {s:'stamp', t:'SIG Passport', sub:'Collect stamps, win something good', tag:'coop',
-   p:"Collect a Discord role for each different SIG you try. Three stamps puts you in a draw for an InfBall ticket or CompSoc merch. Gets people into TypeSig, BitSig or CCSig that they'd never have walked into otherwise.",
-   w:'Push for it at committee, launch at the start of semester 2.'},
-  {s:'board', t:'Opportunities Board', sub:'One pinned list, with deadlines', tag:'solo',
-   p:"Insight days, first-year programmes, SIGINT's pwnEd CTF, competitive programming with CCSig. Right now they're scattered across sponsor emails and random posts. I'll keep one pinned list on the Discord, and push for a sponsor CV and LinkedIn night aimed at first years.",
-   w:'Up within two weeks of the EGM, then updated as things come in.'},
-  {s:'bus', t:'Hackathon Road Trips', sub:'Go together, not alone', tag:'coop',
-   p:"Once people do one hackathon, they usually want more. Groups of first years heading to student hackathons around the UK, with CompSoc helping on travel costs. Going with a group is way less scary, and a really good way to make friends.",
-   w:'Semester 2, once First Commit has got people started.'},
-  {s:'branch', t:'First PR Night', sub:'Your first open-source contribution', tag:'coop',
-   p:"CompSoc runs a lot of its own software on GitHub: the website, Discord bots, Better Informatics and more. Beginner-friendly issues set up in advance, and you leave with your name on a real project people actually use.",
-   w:'Semester 2, working with the Tech Sec.'}
+  {s:'mic', t:'Lecture Shout-outs', sub:'So you hear about things before they happen', tag:'solo',
+   p:"The committee has asked year reps to promote events in our big first-year lectures, IP and CAFI. I'll do it every week: what's on, what's worth going to, and a QR code on the slide where the lecturer lets me.",
+   w:'From the first week after the EGM, every week.'},
+  {s:'lamp', t:'Coursework Nights', sub:'A low-key way in', tag:'coop',
+   p:"Year reps used to run coursework nights in Appleton Tower. I want to bring them back: a regular, relaxed evening where first years work on coursework side by side. No talks, no networking, just a room and people from your year.",
+   w:"Pitch to committee in November. Semester 2 if they're on board."},
+  {s:'scope', t:'SIG Scout', sub:'An honest guide to the 12 SIGs', tag:'solo',
+   p:"I'll go to every SIG's sessions and tell our year straight: which ones are beginner-friendly, what to expect and when to show up. It's easier to walk in somewhere when someone from your year has already been.",
+   w:'Reports start in November, one SIG at a time.'},
+  {s:'ball', t:'InfBall & Events Crew', sub:'More hands for the big nights', tag:'coop',
+   p:"Helping run InfBall is part of the 1st Year Rep's role, and the big events always need more volunteers. I'll join the InfBall team, help at the Winter event, and get first years volunteering and turning up.",
+   w:'Winter event 28 Nov. InfBall in April.'},
+  {s:'loop', t:'Feedback Loop', sub:'What you say, taken to committee', tag:'solo',
+   p:"A feedback form that stays open all year and quick polls after big events. I'll take what first years say to committee meetings every week, and post what actually changed because of it.",
+   w:'Form live in week 1. Updates every month.'},
+  {s:'laptop', t:'Build for CompSoc', sub:'Web dev help, where it\'s wanted', tag:'coop',
+   p:"I build websites freelance. CompSoc's website and events platform are run by volunteers, so I'll offer my time to the Tech Sec on whatever they need, rather than starting something new.",
+   w:'Whenever the Tech Sec wants a hand.'}
 ];
 document.getElementById('questGrid').innerHTML = Q.map((q,i)=>`
   <article class="q">
@@ -742,27 +753,34 @@ const AV = [
 document.getElementById('avatar').innerHTML = sprite(AV).r;
 document.querySelectorAll('.bars').forEach(b=>{ const v=+b.dataset.v; b.innerHTML = Array.from({length:10},(_,i)=>`<i class="${i<v?'on':''}"></i>`).join(''); });
 
-/* ---------- passport ---------- */
-const SIGS = [['HackSIG','hackathons'],['Tardis','hosting'],['TypeSig','type theory'],['BitSig','hardware'],['CCSig','comp. programming'],['SIGINT','security']];
-const stampsEl = document.getElementById('stamps');
-stampsEl.innerHTML = SIGS.map((s,i)=>`<button class="stamp" type="button" id="st${i}" aria-pressed="false" style="--r:${[-7,5,-3,8,-5,4][i]}deg"><span>${s[0]}<small>${s[1]}</small></span></button>`).join('');
-const meter = document.querySelectorAll('.meter i'), status = document.getElementById('passStatus');
-let won = false;
-stampsEl.addEventListener('click', e=>{
-  const b = e.target.closest('.stamp'); if(!b) return;
-  const on = !b.classList.contains('on'); try{ navigator.vibrate && navigator.vibrate(on?18:8); }catch(_){} b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
-  const n = stampsEl.querySelectorAll('.on').length;
-  meter.forEach((m,i)=>m.classList.toggle('on', i<n));
-  if(n>=3){ status.textContent = n===6 ? '6 / 6 · ALL SIGS CLEARED. LEGEND.' : `${n} / 3 · YOU'RE IN THE DRAW!`; status.classList.add('win');
-    if(!won){ won = true; const r = b.getBoundingClientRect(); burst(r.left+r.width/2, r.top+r.height/2, 60); toast('★ IN THE DRAW · InfBall ticket or merch up for grabs'); } }
-  else { status.textContent = `${n} / 3 STAMPS`; status.classList.remove('win'); won = false; }
-});
+/* ---------- SIG scout ---------- */
+const SIGL = [
+  ['Project Share','Show what you\'re building, get feedback','build'],
+  ['Tardis','Hosting and running servers','systems'],
+  ['TypeSig','Theoretical computer science, Lean','theory'],
+  ['SIGINT','Cybersecurity and CTFs','security'],
+  ['CCSIG','Competitive programming','theory'],
+  ['Edinburgh AI','Artificial intelligence','ai'],
+  ['QuantSig','Quantitative finance','career'],
+  ['GameDevSig','Making games','build'],
+  ['BitSig','Hardware and low-level computing','systems'],
+  ['CloudSig','Cloud computing','systems'],
+  ['EVP','Edinburgh Venture Point: startups','career'],
+  ['Edinburgh Neurotech','Neurotechnology','ai']
+];
+const CH = [['all','Everything'],['build','Building things'],['security','Security'],['ai','AI & brains'],['theory','Theory & puzzles'],['systems','Systems & servers'],['career','Startups & finance']];
+const chipsEl=document.getElementById('chips'), sigsEl=document.getElementById('sigs');
+chipsEl.innerHTML = CH.map(([k,l],i)=>`<button type="button" class="chip${i?'':' on'}" data-k="${k}" aria-pressed="${i?'false':'true'}">${l}</button>`).join('');
+sigsEl.innerHTML = SIGL.map(([n,d,k])=>`<div class="sig" data-k="${k}"><b>${n}</b><span>${d}</span><em>SCOUT REPORT · NOV</em></div>`).join('');
+chipsEl.addEventListener('click',e=>{ const c=e.target.closest('.chip'); if(!c) return;
+  chipsEl.querySelectorAll('.chip').forEach(x=>{x.classList.toggle('on',x===c); x.setAttribute('aria-pressed',x===c);});
+  const k=c.dataset.k; sigsEl.querySelectorAll('.sig').forEach(el=>el.classList.toggle('dim', k!=='all' && el.dataset.k!==k)); });
 
 /* ---------- terminal intro ---------- */
 const lines = [
   ['p','$ ','git checkout -b first-years'],
   ['p','$ ','git commit -m "make CompSoc easier to get into"'],
-  ['ok','','[first-years 1a2b3c] 6 quests, 0 repeated promises'],
+  ['ok','','[first-years 1a2b3c] 6 quests, 0 already-done promises'],
   ['p','$ ','git push origin vote --date=28-10']
 ];
 const out = document.getElementById('termOut');
@@ -821,7 +839,7 @@ if(RM) draw(); else loop();
 
 /* ---------- vote button → STAGE CLEAR ---------- */
 const SITE = 'https://senthuran-for-rep.vercel.app';
-const SHARE_TXT = "I'm voting Senthuran for CompSoc 1st Year Rep. EGM is Wed 28 Oct, G.07 Informatics Forum (or online). Join CompSoc free on EUSA so you can vote:";
+const SHARE_TXT = "I'm voting Senthuran for CompSoc 1st Year Rep. EGM is Wed 28 Oct at 19:20 in G.07, Informatics Forum (or online), after the 17:00 STMU. Join CompSoc free on EUSA so you can vote:";
 const sc = document.getElementById('sc'), yes = document.getElementById('yes');
 const store = { get(k){ try{ return JSON.parse(localStorage.getItem(k)||'null'); }catch(_){ return null; } }, set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(_){} } };
 let done = store.get('sen-steps') || {};
@@ -868,19 +886,19 @@ sc.querySelector('[data-mark="join"]').addEventListener('click', ()=>mark('join'
 
 /* step 2: calendar (all-day, date only — time not announced) */
 const gcal = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
-  + '&text=' + encodeURIComponent('CompSoc EGM · Vote Senthuran for 1st Year Rep')
-  + '&dates=20261028/20261029'
+  + '&text=' + encodeURIComponent('CompSoc STMU + EGM · Vote Senthuran (19:20)')
+  + '&dates=20261028T170000/20261028T210000&ctz=Europe/London'
   + '&location=' + encodeURIComponent('G.07, Informatics Forum, 10 Crichton St, Edinburgh EH8 9AB')
-  + '&details=' + encodeURIComponent('CompSoc EGM. Vote in person in G.07 or online. You need to be a CompSoc member on EUSA (free): https://www.eusa.ed.ac.uk/activities/view/compsoc\n\nManifesto: ' + SITE);
+  + '&details=' + encodeURIComponent('STMU 17:00 (Bpuzzled), then the EGM at 19:20. Vote in person in G.07 or online. You need to be a CompSoc member on EUSA (free): https://www.eusa.ed.ac.uk/activities/view/compsoc\n\nManifesto: ' + SITE);
 const aG = document.getElementById('aGcal'); aG.href = gcal; aG.addEventListener('click', ()=>setTimeout(()=>mark('date'),400));
 document.getElementById('aIcs').addEventListener('click', ()=>{
   const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//senthuran-for-rep//EN','CALSCALE:GREGORIAN','BEGIN:VEVENT',
     'UID:compsoc-egm-20261028@senthuran-for-rep.vercel.app','DTSTAMP:20261018T120000Z',
-    'DTSTART;VALUE=DATE:20261028','DTEND;VALUE=DATE:20261029',
-    'SUMMARY:CompSoc EGM · Vote Senthuran for 1st Year Rep',
+    'DTSTART;TZID=Europe/London:20261028T170000','DTEND;TZID=Europe/London:20261028T210000',
+    'SUMMARY:CompSoc STMU + EGM · Vote Senthuran (19:20)',
     'LOCATION:G.07\\, Informatics Forum\\, 10 Crichton St\\, Edinburgh EH8 9AB',
-    'DESCRIPTION:Vote in person in G.07 or online. You need to be a CompSoc member on EUSA (free): https://www.eusa.ed.ac.uk/activities/view/compsoc\\n\\nManifesto: '+SITE,
-    'URL:'+SITE,'BEGIN:VALARM','TRIGGER:-PT15H','ACTION:DISPLAY','DESCRIPTION:CompSoc EGM tomorrow · Vote Senthuran','END:VALARM',
+    'DESCRIPTION:STMU 17:00 (Bpuzzled)\\, then the EGM at 19:20. Vote in person in G.07 or online. You need to be a CompSoc member on EUSA (free): https://www.eusa.ed.ac.uk/activities/view/compsoc\\n\\nManifesto: '+SITE,
+    'URL:'+SITE,'BEGIN:VALARM','TRIGGER:-PT2H','ACTION:DISPLAY','DESCRIPTION:CompSoc STMU + EGM today · Vote Senthuran at 19:20','END:VALARM',
     'END:VEVENT','END:VCALENDAR'].join('\r\n');
   saveBlob(new Blob([ics],{type:'text/calendar'}), 'compsoc-egm.ics');
   mark('date');
@@ -923,7 +941,7 @@ function drawBadge(cv){
   const px=22, ox=660, oy=830, B=['....wwww....','....wxxw....','....wwww....','wwwwwwwwwwww','wddddddddddw','wxxxxxxxxxxw','wxxwwwwwxxxw','wxxxxxxxxxxw','wxxxxxxxxxxw','wddddddddddw'];
   const col={w:'#F3F1EE',x:'#C8232E',d:'#6E0D14'}; B.forEach((r,y)=>[...r].forEach((ch,x)=>{ if(col[ch]){ c.fillStyle=col[ch]; c.fillRect(ox+x*px,oy+y*px,px,px); } }));
   notch(80,1110,440,96,10,'#F3F1EE','#bdb8b1');
-  txt('WED 28 OCT',300,1176,34,'#A3161F',A,'center');
+  txt('WED 28 OCT · 19:20',300,1176,26,'#A3161F',A,'center');
   txt('G.07 · INFORMATICS FORUM',80,1270,30,'#A9A6A2',A);
   txt('senthuran-for-rep.vercel.app',1000,1310,26,'#6f6c69','"JetBrains Mono",monospace','right');
 }
