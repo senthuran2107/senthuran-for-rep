@@ -315,14 +315,14 @@ body.locked{overflow:hidden}
 .sigs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 @media (max-width:900px){.sigs{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:640px){.sigs{grid-template-columns:repeat(2,1fr);gap:8px}}
-.sig{background:var(--chalk-2);clip-path:var(--clip);padding:16px;min-width:0;display:flex;flex-direction:column;gap:6px;transition:opacity .2s,transform .15s steps(2)}
-.sig b{font-family:var(--f-display);font-size:1.05rem;line-height:1.15;overflow-wrap:anywhere}
-.sig span{font-size:13px;color:var(--dust);line-height:1.45}
-.sig em{margin-top:auto;padding-top:8px;font-style:normal;font-family:var(--f-arcade);font-size:7px;color:var(--red-hi);letter-spacing:.06em}
-.sig.dim{opacity:.22}
-.sig:not(.dim):hover{transform:translateY(-3px)}
+.sigc{background:var(--chalk-2);clip-path:var(--clip);padding:16px;min-width:0;display:flex;flex-direction:column;gap:6px;transition:opacity .2s,transform .15s steps(2)}
+.sigc b{font-family:var(--f-display);font-size:1.05rem;line-height:1.15;overflow-wrap:anywhere}
+.sigc span{font-size:13px;color:var(--dust);line-height:1.45}
+.sigc em{margin-top:auto;padding-top:8px;font-style:normal;font-family:var(--f-arcade);font-size:7px;color:var(--red-hi);letter-spacing:.06em}
+.sigc.dim{opacity:.22}
+.sigc:not(.dim):hover{transform:translateY(-3px)}
 #passport .note{margin:14px 0 0}
-@media (max-width:640px){.sig{padding:12px}.sig b{font-size:.95rem}.sig span{font-size:12px}}
+@media (max-width:640px){.sigc{padding:12px}.sigc b{font-size:.95rem}.sigc span{font-size:12px}}
 .tag,.legend i{font-style:normal}
 
 /* quest carousel dots (phone only) */
@@ -771,10 +771,10 @@ const SIGL = [
 const CH = [['all','Everything'],['build','Building things'],['security','Security'],['ai','AI & brains'],['theory','Theory & puzzles'],['systems','Systems & servers'],['career','Startups & finance']];
 const chipsEl=document.getElementById('chips'), sigsEl=document.getElementById('sigs');
 chipsEl.innerHTML = CH.map(([k,l],i)=>`<button type="button" class="chip${i?'':' on'}" data-k="${k}" aria-pressed="${i?'false':'true'}">${l}</button>`).join('');
-sigsEl.innerHTML = SIGL.map(([n,d,k])=>`<div class="sig" data-k="${k}"><b>${n}</b><span>${d}</span><em>SCOUT REPORT · NOV</em></div>`).join('');
+sigsEl.innerHTML = SIGL.map(([n,d,k])=>`<div class="sigc" data-k="${k}"><b>${n}</b><span>${d}</span><em>SCOUT REPORT · NOV</em></div>`).join('');
 chipsEl.addEventListener('click',e=>{ const c=e.target.closest('.chip'); if(!c) return;
   chipsEl.querySelectorAll('.chip').forEach(x=>{x.classList.toggle('on',x===c); x.setAttribute('aria-pressed',x===c);});
-  const k=c.dataset.k; sigsEl.querySelectorAll('.sig').forEach(el=>el.classList.toggle('dim', k!=='all' && el.dataset.k!==k)); });
+  const k=c.dataset.k; sigsEl.querySelectorAll('.sigc').forEach(el=>el.classList.toggle('dim', k!=='all' && el.dataset.k!==k)); });
 
 /* ---------- terminal intro ---------- */
 const lines = [
